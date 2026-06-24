@@ -1,65 +1,298 @@
 import Image from "next/image";
+import Hero from "@/components/Hero";
+import CourseCard from "@/components/CourseCard";
+import Marquee from "@/components/Marquee";
+import MouseParallax from "@/components/MouseParallax";
+import ScrollWords from "@/components/ScrollWords";
+import StickyHeader from "@/components/StickyHeader";
+import Typewriter from "@/components/Typewriter";
+import Footer from "@/components/Footer";
+import TestimonialsCarousel from "@/components/TestimonialsCarousel";
+import { courses, features, testimonials, studioLogos, socials } from "@/data/content";
+
+// Lowercase, then capitalize the first letter (sentence case, RU-aware).
+const toSentence = (s: string) => {
+  const lower = s.toLocaleLowerCase("ru");
+  return lower.replace(/\p{L}/u, (ch) => ch.toLocaleUpperCase("ru"));
+};
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      <StickyHeader />
+      <Hero />
+
+      <main className="relative bg-white text-foreground">
+        {/* Column guides continue down the page, faint over the cream */}
+        <div className="pointer-events-none absolute inset-0 z-10 mx-auto max-w-[1160px] text-black/[0.12]">
+          <span className="absolute inset-y-0 left-0 w-[0.5px] bg-current" />
+          <span className="absolute inset-y-0 left-1/2 hidden -translate-x-1/2 w-[0.5px] bg-current md:block" />
+          <span className="absolute inset-y-0 right-0 w-[0.5px] bg-current" />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+
+        <div className="relative max-w-[1160px] mx-auto px-6 pt-16 flex flex-col gap-20">
+          {/* Intro lead — scroll-driven word reveal, same weight throughout */}
+          <section className="py-16 md:py-28">
+            <ScrollWords
+              text="В поддерживающей обстановке вы попрактикуете все навыки гейм-дизайнера, нарративного дизайнера или левел-дизайнера. Сделаете резюме, портфолио из двух игр, документации и будете готовы к настоящей работе в игровой индустрии."
+              className="mx-auto max-w-3xl text-center text-fluid-2xl leading-snug text-foreground"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          </section>
+
+          {/* ── ОБУЧЕНИЕ ──────────────────────────────────── */}
+          <section className="-mx-6 divide-y divide-black/10 border-y border-black/10 bg-white">
+            {courses.map((c, i) => (
+              <CourseCard key={c.title} course={c} index={i} />
+            ))}
+          </section>
+
+          {/* ── СТУДИИ (logo marquee) ─────────────────────── */}
+          <section className="-mx-6 -mt-20 flex items-stretch border-b border-black/10 text-foreground">
+            <div className="flex max-w-[9.5rem] shrink-0 items-center border-r border-black/10 px-6 text-fluid-sm leading-tight text-foreground/70">
+              Где работают наши ученики
+            </div>
+            <div className="relative z-20 min-w-0 flex-1 overflow-hidden bg-white py-5">
+              <Marquee
+                items={studioLogos}
+                repeat={2}
+                trackClassName="items-center"
+                liClassName="px-7"
+                renderItem={({ src, light }) => (
+                  <Image
+                    src={src}
+                    alt=""
+                    aria-hidden
+                    width={1062}
+                    height={438}
+                    className={`h-8 w-auto object-contain opacity-60 grayscale ${
+                      light ? "invert" : ""
+                    }`}
+                  />
+                )}
+              />
+            </div>
+          </section>
+
+          {/* ── О ШКОЛЕ ───────────────────────────────────── */}
+          <section
+            id="about"
+            className="scroll-mt-28 -mx-6 -mt-20 grid border-b border-black/10 md:grid-cols-2"
           >
-            Documentation
-          </a>
+            {/* Heading — left half (left line → center line) */}
+            <div className="border-b border-black/10 p-6 md:border-b-0 md:border-r md:p-10">
+              <h2 className="text-fluid-4xl leading-tight text-foreground md:sticky md:top-24">
+                Хотите делать инди-игры или работать в больших игровых студиях?
+                Мы поможем!
+              </h2>
+            </div>
+
+            {/* Features — right half (center line → right line), 2 sub-columns */}
+            <div className="grid sm:grid-cols-2">
+              {features.map((f) => (
+                <div
+                  key={f.title}
+                  className="flex flex-col gap-3 border-t border-black/10 p-6 transition-colors duration-200 hover:bg-brand-orange/10 md:p-8 [&:first-child]:border-t-0 sm:[&:nth-child(-n+2)]:border-t-0 sm:[&:nth-child(even)]:border-l"
+                >
+                  <h3 className="font-bold leading-[1.08] text-foreground">
+                    {toSentence(f.title)}
+                  </h3>
+                  <p className="text-fluid-sm text-foreground/65">{f.text}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* ── DIVIDER (poppy meadow) ────────────────────── */}
+          <div
+            data-mouse-parallax-root
+            className="relative z-20 -mx-6 -mt-20 aspect-[3168/470] overflow-hidden"
+          >
+            <MouseParallax strength={6} className="absolute -inset-3">
+              <Image
+                src="/img/divider.png"
+                alt=""
+                aria-hidden
+                fill
+                className="object-cover"
+              />
+            </MouseParallax>
+
+            {/* rule-of-thirds composition schema */}
+            <svg
+              aria-hidden
+              className="pointer-events-none absolute inset-0 z-10 h-full w-full text-white/55"
+              viewBox="0 0 1440 214"
+              preserveAspectRatio="none"
+              fill="none"
+            >
+              <g
+                stroke="currentColor"
+                strokeWidth="0.8"
+                vectorEffect="non-scaling-stroke"
+              >
+                <line x1="-400" y1="71" x2="1840" y2="71" />
+                <line x1="-400" y1="143" x2="1840" y2="143" />
+                <line x1="480" y1="-200" x2="480" y2="420" />
+                <line x1="960" y1="-200" x2="960" y2="420" />
+              </g>
+            </svg>
+
+            {/* Social links, centered */}
+            <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center gap-3">
+              {socials.map(({ label, href, src }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  className="pointer-events-auto grid size-9 place-items-center rounded-lg bg-white shadow-sm transition hover:-translate-y-0.5 md:size-10"
+                >
+                  <Image
+                    src={src}
+                    alt=""
+                    aria-hidden
+                    width={20}
+                    height={20}
+                    className="size-4 md:size-5"
+                  />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* ── ОТЗЫВЫ (carousel) ─────────────────────────── */}
+          <section
+            id="testimonials"
+            className="scroll-mt-28 -mx-6 -mt-20 border-x border-b border-black/10"
+          >
+            <TestimonialsCarousel items={testimonials} />
+          </section>
+
+          {/* ── ОБ АВТОРЕ ─────────────────────────────────── */}
+          <section
+            id="alla"
+            data-mouse-parallax-root
+            className="scroll-mt-28 -mx-6 -mt-20 grid border-b border-black/10 md:grid-cols-2"
+          >
+            {/* Experience — left half, cells stacked on the column lines */}
+            <div className="order-2 flex flex-col md:order-1 md:border-r border-black/10">
+              {/* Name + role */}
+              <div className="flex flex-col gap-3 border-b border-black/10 p-6 md:p-10">
+                <p className="self-start rounded-full border border-black/15 px-4 py-2.5 text-fluid-sm text-foreground">
+                  Об авторе
+                </p>
+                <h2 className="text-fluid-4xl leading-tight text-foreground">
+                  Алла Довгалюк
+                </h2>
+                <p className="text-fluid-sm text-foreground/65">
+                  Основательница школы GDD. Гейм-дизайнер, нарративный дизайнер,
+                  сценарист игр, магистр литературного редактирования.
+                </p>
+              </div>
+
+              {/* Headline stats */}
+              <div className="grid grid-cols-2 border-b border-black/10">
+                <div className="border-r border-black/10 p-6 md:p-8">
+                  <p className="text-fluid-3xl tracking-[-0.02em] text-foreground whitespace-nowrap">
+                    12 лет
+                  </p>
+                  <p className="text-fluid-sm text-foreground/60">
+                    в игровой индустрии
+                  </p>
+                </div>
+                <div className="p-6 md:p-8">
+                  <p className="text-fluid-3xl tracking-[-0.02em] text-foreground whitespace-nowrap">
+                    1 000 000+
+                  </p>
+                  <p className="text-fluid-sm text-foreground/60">
+                    играющих в мои проекты
+                  </p>
+                </div>
+              </div>
+
+              {/* Studios */}
+              <div className="flex flex-col gap-3 border-b border-black/10 p-6 md:p-8">
+                <p className="self-start rounded-full border border-black/15 px-4 py-2.5 text-fluid-sm text-foreground">
+                  Работала в студиях
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {["tinyBuild", "BIG FISH", "BELKA GAMES"].map((l) => (
+                    <span
+                      key={l}
+                      className="rounded-lg bg-black/[0.04] px-4 py-2 text-fluid-sm text-black/55"
+                    >
+                      {l}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Contacts — pinned to the bottom of the column */}
+              <div className="flex flex-1 items-end p-6 md:p-8">
+                <div className="flex flex-wrap gap-x-6 gap-y-2 text-fluid-sm font-medium text-foreground">
+                  <a
+                    href="https://t.me/alla_dovhaliuk"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 transition-colors hover:text-brand-orange"
+                  >
+                    <Image
+                      src="/social/telegram-logo.svg"
+                      alt="Telegram"
+                      width={18}
+                      height={18}
+                      className="size-[1.1em]"
+                    />
+                    @alla_dovhaliuk
+                  </a>
+                  <a
+                    href="mailto:myfirstnameisalla@gmail.com"
+                    className="inline-flex items-center gap-2 transition-colors hover:text-brand-orange"
+                  >
+                    <Image
+                      src="/social/envelope.svg"
+                      alt="Email"
+                      width={18}
+                      height={18}
+                      className="size-[1.1em]"
+                    />
+                    myfirstnameisalla@gmail.com
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Photo — right half, with the mission typed over it */}
+            <div className="relative order-1 min-h-[26rem] overflow-hidden bg-foreground/5 md:order-2 md:min-h-full">
+              <MouseParallax strength={4} className="absolute -inset-2">
+                <Image
+                  src="/alla-2.png"
+                  alt="Алла Довгалюк"
+                  fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  className="object-cover object-[center_22%]"
+                />
+              </MouseParallax>
+
+              {/* Legibility scrim for the typed text */}
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+
+              {/* Mission — typed once as the section scrolls into view */}
+              <div className="pointer-events-none absolute inset-x-6 bottom-6 z-10 md:inset-x-8 md:bottom-8">
+                <Typewriter
+                  loop={false}
+                  texts={[
+                    "Моя цель — обучать хороших людей, которые любят игры и делают игровую индустрию лучше! Я внимательно и с поддержкой разбираю домашние задания, с радостью делюсь своим многолетним опытом в геймдеве, рекомендую своих студентов потенциальным работодателям и остаюсь на связи даже после курса! (смело пишите, я буду рада!).",
+                  ]}
+                  typeSpeed={28}
+                  className="font-mono text-fluid-sm leading-relaxed text-white drop-shadow-[0_1px_6px_rgba(0,0,0,0.6)]"
+                />
+              </div>
+            </div>
+          </section>
         </div>
       </main>
-    </div>
+
+      <Footer />
+    </>
   );
 }
