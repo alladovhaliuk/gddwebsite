@@ -99,15 +99,15 @@ export default function Hero() {
             <br />
             делать видеоигры
           </h1>
-          <button
-            type="button"
-            className="group mt-8 inline-flex items-center gap-2.5 rounded-xl bg-white/80 py-2 pl-4 pr-2 text-[14px] backdrop-blur-md text-black transition hover:bg-white"
+          <a
+            href="#courses"
+            className="group mt-8 flex w-full max-w-sm items-center justify-center gap-2.5 rounded-xl bg-white/80 py-2 pl-4 pr-2 text-[14px] text-black backdrop-blur-md transition hover:bg-white md:inline-flex md:w-auto md:max-w-none"
           >
             <span>Посмотреть все курсы</span>
             <span className="grid size-7 place-items-center rounded-lg bg-white text-brand-orange transition-transform group-hover:translate-y-0.5">
               <ArrowDown className="size-4" strokeWidth={2.25} />
             </span>
-          </button>
+          </a>
         </div>
 
         {/* Ticker: fixed "Идёт набор" label + scrolling course names */}

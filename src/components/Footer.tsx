@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { socials } from "@/data/content";
+import { contactEmail, socials } from "@/data/content";
 
 const footerLinks = [
   { label: "Курсы", href: "#" },
@@ -9,17 +9,13 @@ const footerLinks = [
   { label: "Контакты", href: "#alla" },
 ];
 
-// Social links + email, all shown as white icon chips. Telegram points at
-// Alla's real handle; email opens a mail client.
+// Social links + email, all shown as white icon chips. URLs live in
+// `data/content.ts` so they're shared with the page-body social row.
 const contactIcons = [
-  ...socials.map((s) =>
-    s.label === "Telegram"
-      ? { ...s, href: "https://t.me/alla_dovhaliuk" }
-      : s
-  ),
+  ...socials,
   {
     label: "Почта",
-    href: "mailto:myfirstnameisalla@gmail.com",
+    href: `mailto:${contactEmail}`,
     src: "/social/envelope.svg",
   },
 ];

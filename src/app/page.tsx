@@ -40,7 +40,10 @@ export default function Home() {
           </section>
 
           {/* ── ОБУЧЕНИЕ ──────────────────────────────────── */}
-          <section className="-mx-6 divide-y divide-black/10 border-y border-black/10 bg-white">
+          <section
+            id="courses"
+            className="scroll-mt-28 -mx-6 divide-y divide-black/10 border-y border-black/10 bg-white"
+          >
             {courses.map((c, i) => (
               <CourseCard key={c.title} course={c} index={i} />
             ))}

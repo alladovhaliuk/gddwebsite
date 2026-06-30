@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import MouseParallax from "@/components/MouseParallax";
 import Typewriter from "@/components/Typewriter";
@@ -184,15 +185,7 @@ export default function CourseCard({
       </div>
 
       {/* CTA */}
-      <a
-        href="#"
-        className="group inline-flex items-center gap-2.5 self-start rounded-xl bg-black py-2 pl-4 pr-2 text-[14px] text-white shadow-[inset_0_0_3px_2px_rgba(255,255,255,0.4)]"
-      >
-        <span>Узнать подробнее</span>
-        <span className="grid size-7 place-items-center rounded-lg bg-white text-black shadow-[inset_0_0_2px_1px_rgba(0,0,0,0.25)] transition-transform group-hover:translate-x-0.5">
-          <ArrowRight className="size-4" strokeWidth={2.25} />
-        </span>
-      </a>
+      <CourseCta href={course.href} />
     </div>
   );
 
@@ -206,5 +199,27 @@ export default function CourseCard({
       {ImageBlock}
       {TextBlock}
     </article>
+  );
+}
+
+function CourseCta({ href }: { href?: string }) {
+  const className =
+    "group flex w-full items-center justify-center gap-2.5 rounded-xl bg-black py-2 pl-4 pr-2 text-[14px] text-white shadow-[inset_0_0_3px_2px_rgba(255,255,255,0.4)] md:inline-flex md:w-auto md:self-start";
+  const content = (
+    <>
+      <span>Узнать подробнее</span>
+      <span className="grid size-7 place-items-center rounded-lg bg-white text-black shadow-[inset_0_0_2px_1px_rgba(0,0,0,0.25)] transition-transform group-hover:translate-x-0.5">
+        <ArrowRight className="size-4" strokeWidth={2.25} />
+      </span>
+    </>
+  );
+  return href ? (
+    <Link href={href} className={className}>
+      {content}
+    </Link>
+  ) : (
+    <a href="#" className={className}>
+      {content}
+    </a>
   );
 }

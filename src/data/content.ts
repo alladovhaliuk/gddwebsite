@@ -11,6 +11,7 @@ export type Course = {
   status: { label: string; tone: "open" | "free" };
   points: { title: string; text: string }[];
   image?: string; // path under /public
+  href?: string; // course landing page; falls back to "#" when absent
   // cycling typewriter blocks over the image; `pos` = position/size classes
   overlays?: { lines: string[]; pos: string }[];
 };
@@ -49,9 +50,10 @@ export const courses: Course[] = [
     startDate: "12/01/2026",
     status: { label: "Идёт набор", tone: "open" },
     image: "/img/narrators.png",
+    href: "/courses/narrative",
     overlays: [
       {
-        pos: "top-[calc(66%+20px)] left-5 max-w-[42%]",
+        pos: "top-6 left-5 max-w-[60%] md:top-[calc(66%+20px)] md:max-w-[42%]",
         lines: [
           "Сцена 01\nЗакат опустился на дорогу.\nДвое путников остановились у костра.",
           "Сцена 02\nКостёр почти прогорел.\nПервый путник заговорил о дороге назад.",
@@ -80,6 +82,7 @@ export const courses: Course[] = [
     startDate: "20/04/2026",
     status: { label: "Идёт набор", tone: "open" },
     image: "/img/gamedesigners.png",
+    href: "/courses/game-design",
     overlays: [
       {
         pos: "top-6 left-5 max-w-[42%]",
@@ -117,6 +120,7 @@ export const courses: Course[] = [
     title: "Персональные консультации",
     status: { label: "Свободные места", tone: "free" },
     image: "/img/consult.png",
+    href: "/courses/consultations",
     overlays: [
       {
         pos: "bottom-1/3 right-5 max-w-[44%] text-right",
@@ -244,7 +248,21 @@ export const marqueeItems = courses
   }));
 
 export const socials = [
-  { label: "Instagram", href: "#", src: "/social/instagram-logo.svg" },
-  { label: "Telegram", href: "#", src: "/social/telegram-logo.svg" },
-  { label: "LinkedIn", href: "#", src: "/social/linkedin-logo.svg" },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/alla.dovhaliuk?igsh=MTd3Z3puOWRyc2xuZw==",
+    src: "/social/instagram-logo.svg",
+  },
+  {
+    label: "Telegram",
+    href: "https://t.me/alla_dovhaliuk",
+    src: "/social/telegram-logo.svg",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/alla-dovhaliuk-769611116/",
+    src: "/social/linkedin-logo.svg",
+  },
 ];
+
+export const contactEmail = "myfirstnameisalla@gmail.com";

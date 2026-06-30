@@ -1,16 +1,22 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useRafScroll } from "@/hooks/useRafScroll";
 
-const navLinks: { label: string; href?: string }[] = [
+export type NavLink = { label: string; href?: string };
+
+// Default nav for the homepage. Pass a custom `navLinks` prop on other pages
+// to reflect their own sections. Keep "Курсы" in the list to retain the mega
+// menu — it's matched by label.
+const defaultNavLinks: NavLink[] = [
   { label: "Курсы" },
   { label: "О школе", href: "#about" },
   { label: "Отзывы", href: "#testimonials" },
   { label: "Об авторе", href: "#alla" },
-  { label: "Контакты", href: "#" },
+  { label: "Контакты", href: "#alla" },
 ];
 
 const courseMenu = [
@@ -19,21 +25,21 @@ const courseMenu = [
     desc: "Сюжет, GDD, диалоги и портфолио нарративного гейм-дизайнера.",
     meta: "Старт 12/01/2026",
     img: "/img/narrators.png",
-    href: "#",
+    href: "/courses/narrative",
   },
   {
     title: "«Гейм-дизайнеры»",
     desc: "Геймплей, механики, метрики и документы гейм-дизайнера.",
     meta: "Старт 20/04/2026",
     img: "/img/gamedesigners.png",
-    href: "#",
+    href: "/courses/game-design",
   },
   {
     title: "Персональные консультации",
     desc: "Разработка, издатель, бюджет и продвижение вашей игры.",
     meta: "Есть места",
     img: "/img/consult.png",
-    href: "#",
+    href: "/courses/consultations",
   },
 ];
 
@@ -51,7 +57,11 @@ const Chevron = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-export default function StickyHeader() {
+export default function StickyHeader({
+  navLinks = defaultNavLinks,
+}: {
+  navLinks?: NavLink[];
+} = {}) {
   const [scrolled, setScrolled] = useState(false);
   const [coursesOpen, setCoursesOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -95,10 +105,11 @@ export default function StickyHeader() {
 
   return (
     <header className="fixed top-0 inset-x-0 z-50">
-      <div className="relative z-50 max-w-[1160px] mx-auto px-6 py-6 flex items-center gap-4">
+      <div className="relative z-50 max-w-[1160px] mx-auto px-3 md:px-6 py-6 flex items-center gap-4">
         {/* Logo */}
-        <a
-          href="#"
+        <Link
+          href="/"
+          aria-label="GDD — на главную"
           className={`logo-anim shrink-0 grid place-items-center size-14 rounded-full backdrop-blur-md transition-colors ${
             scrolled ? "bg-white/85 ring-1 ring-black/5" : "bg-white/40"
           }`}
@@ -110,7 +121,7 @@ export default function StickyHeader() {
             height={48}
             className="size-12"
           />
-        </a>
+        </Link>
 
         {/* Nav links — frosted glass that solidifies after scroll */}
         <nav
@@ -215,9 +226,12 @@ export default function StickyHeader() {
         </div>
 
         {/* CTA — desktop only */}
-        <button className="hidden lg:block shrink-0 ml-auto h-14 px-7 whitespace-nowrap rounded-xl bg-brand-orange/90 backdrop-blur-md text-[14px] text-black font-medium hover:bg-brand-orange transition">
+        <Link
+          href="/book"
+          className="hidden lg:grid shrink-0 ml-auto h-14 place-items-center px-7 whitespace-nowrap rounded-xl bg-brand-orange/90 backdrop-blur-md text-[14px] text-black font-medium hover:bg-brand-orange transition"
+        >
           Хочу обучаться
-        </button>
+        </Link>
 
         {/* Hamburger — mobile only */}
         <button
@@ -306,13 +320,13 @@ export default function StickyHeader() {
             )
           )}
 
-          <button
-            type="button"
+          <Link
+            href="/book"
             onClick={closeMobile}
-            className="mt-8 h-14 shrink-0 rounded-xl bg-brand-orange/90 text-[15px] font-medium text-black transition hover:bg-brand-orange"
+            className="mt-8 grid h-14 shrink-0 place-items-center rounded-xl bg-brand-orange/90 text-[15px] font-medium text-black transition hover:bg-brand-orange"
           >
             Хочу обучаться
-          </button>
+          </Link>
         </nav>
       </div>
     </header>
