@@ -22,7 +22,7 @@ export default function Home() {
       <StickyHeader />
       <Hero />
 
-      <main className="relative bg-white text-foreground">
+      <main id="main" className="relative bg-white text-foreground">
         {/* Column guides continue down the page, faint over the cream */}
         <div className="pointer-events-none absolute inset-0 z-10 mx-auto max-w-[1160px] text-black/[0.12]">
           <span className="absolute inset-y-0 left-0 w-[0.5px] bg-current" />
@@ -284,7 +284,7 @@ export default function Home() {
                 <Typewriter
                   loop={false}
                   texts={[
-                    "Моя цель — обучать хороших людей, которые любят игры и делают игровую индустрию лучше! Я внимательно и с поддержкой разбираю домашние задания, с радостью делюсь своим многолетним опытом в геймдеве, рекомендую своих студентов потенциальным работодателям и остаюсь на связи даже после курса! (смело пишите, я буду рада!).",
+                    "Моя цель: обучать хороших людей, которые любят игры и делают игровую индустрию лучше! Я внимательно и с поддержкой разбираю домашние задания, с радостью делюсь своим многолетним опытом в геймдеве, рекомендую своих студентов потенциальным работодателям и остаюсь на связи даже после курса! (смело пишите, я буду рада!).",
                   ]}
                   typeSpeed={28}
                   className="font-mono text-fluid-sm leading-relaxed text-white drop-shadow-[0_1px_6px_rgba(0,0,0,0.6)]"

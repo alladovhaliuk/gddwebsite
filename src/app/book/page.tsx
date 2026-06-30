@@ -8,7 +8,7 @@ import BookingForm from "@/components/BookingForm";
 export const metadata: Metadata = {
   title: "Забронировать место | Школа GDD",
   description:
-    "Оставьте контактные данные — мы свяжемся с вами и обсудим участие в курсе.",
+    "Оставьте контактные данные, мы свяжемся с вами и обсудим участие в курсе.",
 };
 
 // Slim header for the booking flow — no nav, no mega menu. Just the logo and
@@ -21,7 +21,7 @@ export default function BookPage() {
       <header className="absolute inset-x-0 top-0 z-50 flex items-center gap-3 px-3 py-6 md:px-6">
         <Link
           href="/"
-          aria-label="GDD — на главную"
+          aria-label="GDD, на главную"
           className="logo-anim grid size-14 shrink-0 place-items-center rounded-full bg-white/40 backdrop-blur-md transition-colors"
         >
           <Image

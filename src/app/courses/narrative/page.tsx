@@ -25,10 +25,53 @@ import {
   presentation,
 } from "@/data/narrative";
 
+const courseDescription =
+  "Курс нарративного дизайна «Нарративщики». Научим всему за 9 недель, без специальной подготовки, навыков или программ.";
+
 export const metadata: Metadata = {
-  title: "Курс «Нарративщики» — нарративный гейм-дизайн | Школа GDD",
-  description:
-    "Курс нарративного дизайна «Нарративщики». Научим всему за 9 недель — без специальной подготовки, навыков или программ.",
+  title: "Курс «Нарративщики», нарративный гейм-дизайн",
+  description: courseDescription,
+  alternates: { canonical: "/courses/narrative" },
+  openGraph: {
+    title: "Курс «Нарративщики» | Школа GDD",
+    description: courseDescription,
+    url: "/courses/narrative",
+    images: [{ url: "/img/narrators.png", width: 1280, height: 720, alt: "Курс «Нарративщики»" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Курс «Нарративщики» | Школа GDD",
+    description: courseDescription,
+    images: ["/img/narrators.png"],
+  },
+};
+
+const courseLd = {
+  "@context": "https://schema.org",
+  "@type": "Course",
+  name: "Курс «Нарративщики»",
+  description: courseDescription,
+  url: "/courses/narrative",
+  inLanguage: "ru",
+  image: "/img/narrators.png",
+  provider: {
+    "@type": "EducationalOrganization",
+    name: "Школа GDD",
+    sameAs: "/",
+  },
+  offers: {
+    "@type": "Offer",
+    price: "759",
+    priceCurrency: "USD",
+    availability: "https://schema.org/InStock",
+    url: "/book?course=narrative",
+  },
+  hasCourseInstance: {
+    "@type": "CourseInstance",
+    courseMode: "Online",
+    startDate: "2026-01-12",
+    inLanguage: "ru",
+  },
 };
 
 // Lowercase, then capitalize the first letter (sentence case, RU-aware).
@@ -62,7 +105,7 @@ export default function NarrativeCoursePage() {
     `${programTotalWeeks} недель обучения с нуля`,
     `${lessonCount} видеоуроков`,
     `${callCount} личных созвонов с преподавателем`,
-    "2 игры в портфолио — личная + командная",
+    "2 игры в портфолио: личная + командная",
     "Подробный письменный фидбэк на каждое ДЗ",
   ];
 
@@ -70,8 +113,12 @@ export default function NarrativeCoursePage() {
     <>
       <StickyHeader navLinks={courseNavLinks} />
       <CourseHero hero={narrativeHero} armatureIndex={0} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(courseLd) }}
+      />
 
-      <main className="relative bg-white text-foreground">
+      <main id="main" className="relative bg-white text-foreground">
         {/* Column guides continue down the page */}
         <div className="pointer-events-none absolute inset-0 z-10 mx-auto max-w-[1160px] text-black/[0.12]">
           <span className="absolute inset-y-0 left-0 w-[0.5px] bg-current" />
@@ -183,7 +230,7 @@ export default function NarrativeCoursePage() {
                       className="mt-0.5 size-5 shrink-0 text-brand-orange"
                       strokeWidth={2}
                     />
-                    Рекомендация в LinkedIn — самым трудолюбивым
+                    Рекомендация в LinkedIn, самым трудолюбивым
                   </p>
                 </div>
               </div>

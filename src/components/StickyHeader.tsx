@@ -109,7 +109,7 @@ export default function StickyHeader({
         {/* Logo */}
         <Link
           href="/"
-          aria-label="GDD — на главную"
+          aria-label="GDD, на главную"
           className={`logo-anim shrink-0 grid place-items-center size-14 rounded-full backdrop-blur-md transition-colors ${
             scrolled ? "bg-white/85 ring-1 ring-black/5" : "bg-white/40"
           }`}

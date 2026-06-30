@@ -23,11 +23,52 @@ import {
   consultationsFaq,
 } from "@/data/consultations";
 
+const pageDescription =
+  "Персональные консультации и сопровождение разработки игр: команда, бюджет, документация, работа с издателями, выход на зарубежный рынок.";
+
 export const metadata: Metadata = {
-  title:
-    "Персональные консультации по созданию игр — сопровождение от идеи до релиза | Школа GDD",
-  description:
-    "Персональные консультации и сопровождение разработки игр: команда, бюджет, документация, работа с издателями, выход на зарубежный рынок.",
+  title: "Персональные консультации по созданию игр",
+  description: pageDescription,
+  alternates: { canonical: "/courses/consultations" },
+  openGraph: {
+    title: "Персональные консультации по созданию игр | Школа GDD",
+    description: pageDescription,
+    url: "/courses/consultations",
+    images: [{ url: "/img/consult.png", width: 1280, height: 720, alt: "Персональные консультации по созданию игр" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Персональные консультации по созданию игр | Школа GDD",
+    description: pageDescription,
+    images: ["/img/consult.png"],
+  },
+};
+
+const serviceLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Персональные консультации по созданию игр",
+  description: pageDescription,
+  url: "/courses/consultations",
+  inLanguage: "ru",
+  image: "/img/consult.png",
+  provider: {
+    "@type": "EducationalOrganization",
+    name: "Школа GDD",
+    sameAs: "/",
+  },
+  offers: {
+    "@type": "Offer",
+    price: "299",
+    priceCurrency: "USD",
+    priceSpecification: {
+      "@type": "PriceSpecification",
+      priceCurrency: "USD",
+      price: "299",
+      valueAddedTaxIncluded: false,
+      description: "от $299, итоговая стоимость зависит от формата и стадии проекта",
+    },
+  },
 };
 
 // Lowercase, then capitalize the first letter (sentence case, RU-aware).
@@ -54,8 +95,12 @@ export default function ConsultationsPage() {
     <>
       <StickyHeader navLinks={courseNavLinks} />
       <CourseHero hero={consultationsHero} armatureIndex={2} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }}
+      />
 
-      <main className="relative bg-white text-foreground">
+      <main id="main" className="relative bg-white text-foreground">
         {/* Column guides continue down the page */}
         <div className="pointer-events-none absolute inset-0 z-10 mx-auto max-w-[1160px] text-black/[0.12]">
           <span className="absolute inset-y-0 left-0 w-[0.5px] bg-current" />

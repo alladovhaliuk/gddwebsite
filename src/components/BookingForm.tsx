@@ -9,6 +9,7 @@ import { contactEmail, courses as homepageCourses } from "@/data/content";
 import { pricing as narrativePricing } from "@/data/narrative";
 import { gameDesignPricing } from "@/data/game-design";
 import type { Pricing } from "@/data/types";
+import { submitBooking } from "@/app/book/actions";
 
 /**
  * Booking form for /book. Single-viewport split: left half is the chosen
@@ -72,6 +73,8 @@ export default function BookingForm() {
   // 1 = full payment; 2–6 = installments.
   const [parts, setParts] = useState<number>(1);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const perPart = course
     ? Math.round(course.pricing.priceValue / parts)
@@ -82,13 +85,32 @@ export default function BookingForm() {
   // so the empty state still feels on-brand instead of a blank panel.
   const heroImage = course?.image ?? "/form_hero.png";
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    if (submitting) return;
+    setError(null);
+    setSubmitting(true);
+    const result = await submitBooking({
+      course: course?.label ?? "(не выбран)",
+      parts,
+      priceValue: course?.pricing.priceValue ?? 0,
+      currency: course?.pricing.currency ?? "",
+      name,
+      email,
+      telegram,
+      instagram,
+      note,
+    });
+    setSubmitting(false);
+    if (result.ok) {
+      setSubmitted(true);
+    } else {
+      setError(result.error);
+    }
   };
 
   return (
-    <main className="grid h-full bg-white text-foreground md:grid-cols-2">
+    <main id="main" className="grid h-full bg-white text-foreground md:grid-cols-2">
       {/* Left — course hero painting, fixed full-height column. Stays put
           while the right column scrolls. */}
       <aside className="relative isolate hidden overflow-hidden border-r border-black/10 bg-cream md:block">
@@ -104,7 +126,7 @@ export default function BookingForm() {
         ) : (
           <div className="flex h-full items-center justify-center p-12 text-center">
             <p className="max-w-sm text-fluid-2xl leading-snug text-foreground/55">
-              Выберите курс справа — и мы подскажем следующие шаги.
+              Выберите курс справа, и мы подскажем следующие шаги.
             </p>
           </div>
         )}
@@ -119,7 +141,7 @@ export default function BookingForm() {
             </h1>
           ) : (
             <p className="max-w-md text-fluid-4xl font-bold leading-tight">
-              Выберите курс справа — и мы подскажем следующие шаги.
+              Выберите курс справа, и мы подскажем следующие шаги.
             </p>
           )}
         </div>
@@ -144,7 +166,7 @@ export default function BookingForm() {
             >
               <header className="flex flex-col gap-3">
                 <h2 className="text-fluid-3xl leading-tight text-foreground">
-                  Оставьте контакты — мы свяжемся в течение суток
+                  Оставьте контакты, мы свяжемся в течение суток
                 </h2>
               </header>
 
@@ -217,7 +239,7 @@ export default function BookingForm() {
                 value={note}
                 onChange={setNote}
                 placeholder="Можно коротко: опыт в геймдеве, идея, вопросы…"
-                hint="Необязательно — поможет нам подготовиться к разговору."
+                hint="Необязательно, поможет нам подготовиться к разговору."
               />
             </div>
 
@@ -230,7 +252,7 @@ export default function BookingForm() {
                   Предпочтительная оплата
                 </legend>
                 <p className="-mt-1 text-fluid-xs text-foreground/55">
-                  Сейчас ничего платить не нужно — обсудим формат оплаты,
+                  Сейчас ничего платить не нужно, обсудим формат оплаты,
                   когда напишем вам.
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -270,11 +292,23 @@ export default function BookingForm() {
             {/* Sticky footer — submit button is always reachable without
                 scrolling, even if the form body overflows the viewport. */}
             <div className="shrink-0 border-t border-black/10 bg-white px-6 py-5 md:px-12 md:py-6">
+              {error && (
+                <p
+                  role="alert"
+                  className="mb-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-fluid-sm text-red-900"
+                >
+                  {error}
+                </p>
+              )}
               <button
                 type="submit"
-                className="group flex w-full items-center justify-center gap-2.5 rounded-xl bg-black py-3 pl-5 pr-2 text-[14px] text-white shadow-[inset_0_0_3px_2px_rgba(255,255,255,0.4)]"
+                disabled={submitting}
+                aria-busy={submitting}
+                className="group flex w-full items-center justify-center gap-2.5 rounded-xl bg-black py-3 pl-5 pr-2 text-[14px] text-white shadow-[inset_0_0_3px_2px_rgba(255,255,255,0.4)] disabled:cursor-not-allowed disabled:opacity-60"
               >
-                <span>Забронировать место</span>
+                <span>
+                  {submitting ? "Отправляем…" : "Забронировать место"}
+                </span>
                 <span className="grid size-7 place-items-center rounded-lg bg-white text-black shadow-[inset_0_0_2px_1px_rgba(0,0,0,0.25)] transition-transform group-hover:translate-x-0.5">
                   <ArrowRight className="size-4" strokeWidth={2.25} />
                 </span>

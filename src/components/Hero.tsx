@@ -121,7 +121,7 @@ export default function Hero() {
               repeat={6}
               trackClassName="whitespace-nowrap"
               liClassName="px-6 text-fluid-sm"
-              renderItem={(item) => `${item.title} — старт ${item.date}`}
+              renderItem={(item) => `${item.title}, старт ${item.date}`}
             />
           </div>
         </div>

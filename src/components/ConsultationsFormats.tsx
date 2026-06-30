@@ -105,10 +105,10 @@ export default function ConsultationsFormats({
                   />
                   <span>
                     <span className="font-bold text-foreground">
-                      {f.audience.split(" — ")[0]}
+                      {f.audience.split(": ")[0]}
                     </span>
-                    {f.audience.includes(" — ")
-                      ? ` — ${f.audience.split(" — ").slice(1).join(" — ")}`
+                    {f.audience.includes(": ")
+                      ? `: ${f.audience.split(": ").slice(1).join(": ")}`
                       : null}
                   </span>
                 </p>
