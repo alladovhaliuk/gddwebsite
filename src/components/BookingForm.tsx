@@ -67,7 +67,6 @@ export default function BookingForm() {
   const [course, setCourse] = useState<CourseOption | null>(initialCourse);
   const [name, setName] = useState("");
   const [telegram, setTelegram] = useState("");
-  const [instagram, setInstagram] = useState("");
   const [email, setEmail] = useState("");
   const [note, setNote] = useState("");
   // 1 = full payment; 2–6 = installments.
@@ -98,7 +97,6 @@ export default function BookingForm() {
       name,
       email,
       telegram,
-      instagram,
       note,
     });
     setSubmitting(false);
@@ -227,19 +225,12 @@ export default function BookingForm() {
                 onChange={setTelegram}
                 placeholder="@username"
               />
-              <Field
-                label="Instagram"
-                required
-                value={instagram}
-                onChange={setInstagram}
-                placeholder="@username"
-              />
               <FieldArea
-                label="Расскажите о себе"
+                label="Ваши вопросы"
                 value={note}
                 onChange={setNote}
-                placeholder="Можно коротко: опыт в геймдеве, идея, вопросы…"
-                hint="Необязательно, поможет нам подготовиться к разговору."
+                placeholder="Напишите ваши вопросы"
+                hint="Если вопросов нет — просто пропустите это поле."
               />
             </div>
 

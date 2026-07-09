@@ -250,7 +250,7 @@ export const marqueeItems = courses
 export const socials = [
   {
     label: "Instagram",
-    href: "https://www.instagram.com/alla.dovhaliuk?igsh=MTd3Z3puOWRyc2xuZw==",
+    href: "https://www.instagram.com/alla.game.designer/",
     src: "/social/instagram-logo.svg",
   },
   {

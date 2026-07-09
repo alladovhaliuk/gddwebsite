@@ -19,7 +19,6 @@ export type BookingPayload = {
   name: string;
   email: string;
   telegram: string;
-  instagram: string;
   note: string;
 };
 
@@ -53,10 +52,9 @@ const linesFromPayload = (p: BookingPayload) => {
     `Имя: ${p.name}`,
     `Email: ${p.email}`,
     `Telegram: ${p.telegram}`,
-    `Instagram: ${p.instagram}`,
   ];
   if (p.note.trim()) {
-    out.push("", "О себе:", p.note.trim());
+    out.push("", "Вопросы:", p.note.trim());
   }
   return out.join("\n");
 };
