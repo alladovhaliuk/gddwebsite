@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactLenis, type LenisRef } from "lenis/react";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, type ReactNode } from "react";
 
 /**
@@ -15,6 +16,15 @@ import { useEffect, useRef, type ReactNode } from "react";
  */
 export default function SmoothScroll({ children }: { children: ReactNode }) {
   const lenisRef = useRef<LenisRef>(null);
+
+  // On route change, snap Lenis to the top. Lenis keeps its own animated
+  // scroll position, so without this it "restores" the previous page's
+  // offset and the new page opens mid-scroll instead of at the top.
+  const pathname = usePathname();
+  useEffect(() => {
+    if (window.location.hash) return; // anchor navigation wins
+    lenisRef.current?.lenis?.scrollTo(0, { immediate: true, force: true });
+  }, [pathname]);
 
   useEffect(() => {
     const onClick = (event: MouseEvent) => {
