@@ -123,7 +123,9 @@ export default function ProgramSection({
           <h2 className="font-bold leading-tight tracking-[-0.02em] text-white text-fluid-2xl md:text-fluid-4xl">
             Программа курса
           </h2>
-          <p className="text-fluid-sm text-white/85">
+          {/* The divider is too short on phones to carry a subtitle — the
+              week count only shows from md up. */}
+          <p className="hidden text-fluid-sm text-white/85 md:block">
             {totalWeeks} {pluralWeeks(totalWeeks)}
           </p>
         </div>
