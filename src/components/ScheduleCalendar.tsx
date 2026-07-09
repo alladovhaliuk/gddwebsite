@@ -208,10 +208,10 @@ export default function ScheduleCalendar({
                       <span className="grid w-14 shrink-0 place-items-center border-r border-black/10 text-brand-orange">
                         <Video className="size-4" strokeWidth={2.25} />
                       </span>
-                      <div className="flex flex-1 items-center gap-3 px-4 py-4">
-                        <span className="text-fluid-xs uppercase tracking-[0.15em] text-foreground/55">
+                      <div className="flex-1 px-4 py-4">
+                        <p className="mb-2 text-fluid-xs uppercase tracking-[0.15em] text-foreground/55">
                           {dayHeader}
-                        </span>
+                        </p>
                         <p
                           className={`text-fluid-sm leading-snug ${
                             topic
