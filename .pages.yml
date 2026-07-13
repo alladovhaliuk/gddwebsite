@@ -1,0 +1,668 @@
+# Pages CMS (https://pagescms.org) — админка для редактирования текстов сайта.
+# Клиент заходит на app.pagescms.org через GitHub, правит поля в формах,
+# «Save» делает коммит в этот репозиторий, Vercel автоматически пересобирает
+# сайт. Схема ниже описывает файлы content/*.json.
+
+media:
+  input: public
+  output: /
+
+content:
+  # ── Главная страница ─────────────────────────────────────────────
+  - name: main
+    label: Главная страница
+    type: file
+    path: content/main.json
+    format: json
+    fields:
+      - name: home
+        label: Первый экран и блок «Об авторе»
+        type: object
+        fields:
+          - name: heroTitle
+            label: Главный заголовок
+            description: Каждая строка с новой строки — так текст разбивается на экране.
+            type: text
+            required: true
+          - name: heroCta
+            label: Кнопка под заголовком
+            type: string
+            required: true
+          - name: intro
+            label: Вступительный текст (появляется при прокрутке)
+            type: text
+            required: true
+          - name: aboutHeading
+            label: Заголовок блока «О школе»
+            type: text
+            required: true
+          - name: author
+            label: Блок «Об авторе»
+            type: object
+            fields:
+              - name: name
+                label: Имя
+                type: string
+                required: true
+              - name: role
+                label: Описание под именем
+                type: text
+              - name: stats
+                label: Цифры (12 лет, 1 000 000+ …)
+                type: object
+                list: true
+                fields:
+                  - name: value
+                    label: Число
+                    type: string
+                  - name: label
+                    label: Подпись под числом
+                    type: string
+              - name: studios
+                label: Студии (плашки)
+                type: string
+                list: true
+              - name: mission
+                label: Текст поверх фото (печатается на сайте сам)
+                type: text
+      - name: features
+        label: Карточки «О школе» (почему мы)
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: Заголовок карточки
+            type: string
+            required: true
+          - name: text
+            label: Текст карточки
+            type: text
+      - name: courses
+        label: Карточки курсов на главной
+        type: object
+        list: true
+        fields:
+          - name: kind
+            label: Тип
+            type: select
+            options:
+              values:
+                - Курс
+                - Консультация
+          - name: title
+            label: Название
+            type: string
+            required: true
+          - name: startDate
+            label: Дата старта
+            description: "Формат: ДД/ММ/ГГГГ, например 12/01/2026. Показывается в бегущей строке. Для консультаций оставить пустым."
+            type: string
+          - name: status
+            label: Статус
+            type: object
+            fields:
+              - name: label
+                label: Надпись статуса
+                type: string
+              - name: tone
+                label: Цвет статуса
+                type: select
+                options:
+                  values:
+                    - value: open
+                      label: Оранжевый (идёт набор)
+                    - value: free
+                      label: Зелёный (свободные места)
+          - name: points
+            label: Пункты «чему научим»
+            type: object
+            list: true
+            fields:
+              - name: title
+                label: Заголовок пункта
+                type: string
+              - name: text
+                label: Текст пункта
+                type: text
+          - name: image
+            label: Картинка курса
+            type: image
+          - name: href
+            label: "⚙️ Ссылка на страницу курса (техническое, не менять)"
+            type: string
+          - name: overlays
+            label: Печатающийся текст поверх картинки
+            type: object
+            list: true
+            fields:
+              - name: pos
+                label: "⚙️ Позиция на картинке (техническое, не менять)"
+                type: string
+              - name: lines
+                label: Тексты (печатаются по очереди)
+                type: text
+                list: true
+      - name: testimonials
+        label: Отзывы
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Имя
+            type: string
+            required: true
+          - name: text
+            label: Текст отзыва
+            type: text
+            required: true
+      - name: socials
+        label: Соцсети
+        type: object
+        list: true
+        fields:
+          - name: label
+            label: Название
+            type: string
+          - name: href
+            label: Ссылка
+            type: string
+          - name: src
+            label: "⚙️ Иконка (техническое, не менять)"
+            type: string
+      - name: contactEmail
+        label: Почта школы
+        type: string
+
+  # ── Курс «Нарративщики» ──────────────────────────────────────────
+  - name: narrative
+    label: Курс «Нарративщики»
+    type: file
+    path: content/narrative.json
+    format: json
+    fields:
+      - name: hero
+        label: Первый экран
+        type: object
+        fields:
+          - name: title
+            label: Заголовок
+            type: string
+            required: true
+          - name: cta
+            label: Кнопка
+            type: string
+          - name: ctaHref
+            label: "⚙️ Ссылка кнопки (техническое, не менять)"
+            type: string
+          - name: image
+            label: Фоновая картинка
+            type: image
+      - name: intro
+        label: Вступительный текст
+        type: object
+        fields:
+          - name: text
+            label: Текст
+            type: text
+            required: true
+      - name: resultsHeading
+        label: Заголовок блока «Результаты»
+        type: string
+      - name: totalWeeks
+        label: Сколько всего недель в курсе
+        type: number
+      - name: weeks
+        label: Программа курса (недели)
+        type: object
+        list: true
+        fields:
+          - name: index
+            label: Номер недели
+            type: number
+          - name: group
+            label: "⚙️ Группа страниц, напр. 1–3 (техническое, не менять)"
+            type: string
+          - name: title
+            label: Название недели
+            type: string
+          - name: days
+            label: Занятия по дням
+            type: object
+            list: true
+            fields:
+              - name: day
+                label: День (ПН / СР / ПТ)
+                type: string
+              - name: text
+                label: Тема занятия
+                type: text
+          - name: tasks
+            label: Задания недели
+            type: object
+            list: true
+            fields:
+              - name: kind
+                label: Тип задания (иконка)
+                type: select
+                options:
+                  values:
+                    - value: doc
+                      label: Документ (письменное ДЗ)
+                    - value: proto
+                      label: Прототип
+                    - value: call
+                      label: Созвон
+              - name: text
+                label: Текст задания
+                type: string
+      - name: teachers
+        label: Преподаватели
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Имя
+            type: string
+            required: true
+          - name: role
+            label: Описание
+            type: text
+          - name: image
+            label: Фото
+            type: image
+          - name: badge
+            label: Плашка (напр. «Главный преподаватель»)
+            type: string
+          - name: imagePosition
+            label: "⚙️ Кадрирование фото (техническое, не менять)"
+            type: string
+      - name: pricing
+        label: Стоимость
+        type: object
+        fields:
+          - name: price
+            label: Цена (как показывается, напр. $759)
+            type: string
+            required: true
+          - name: priceValue
+            label: Цена числом (для расчёта рассрочки)
+            type: number
+            required: true
+          - name: currency
+            label: Значок валюты
+            type: string
+          - name: installments
+            label: На сколько частей рассрочка
+            type: number
+          - name: note
+            label: Приписка под ценой
+            type: string
+          - name: perk
+            label: Бонус (скидка на другие курсы)
+            type: text
+          - name: primaryCta
+            label: Главная кнопка
+            type: string
+          - name: secondaryCta
+            label: Вторая кнопка (открыть рассрочку)
+            type: string
+          - name: installmentCtaLabel
+            label: Кнопка «скрыть рассрочку»
+            type: string
+      - name: faq
+        label: Вопросы и ответы (FAQ)
+        type: object
+        list: true
+        fields:
+          - name: q
+            label: Вопрос
+            type: string
+            required: true
+          - name: a
+            label: Ответ
+            type: text
+            required: true
+      - name: presentation
+        label: Блок «Презентация курса»
+        type: object
+        fields:
+          - name: title
+            label: Заголовок
+            type: string
+          - name: subtext
+            label: Текст
+            type: text
+          - name: cta
+            label: Кнопка презентации
+            type: string
+          - name: url
+            label: Ссылка на презентацию
+            type: string
+          - name: videoCta
+            label: Кнопка видео
+            type: string
+          - name: videoUrl
+            label: Ссылка на видео (YouTube)
+            type: string
+
+  # ── Курс «Гейм-дизайнеры» ────────────────────────────────────────
+  - name: game-design
+    label: Курс «Гейм-дизайнеры»
+    type: file
+    path: content/game-design.json
+    format: json
+    fields:
+      - name: hero
+        label: Первый экран
+        type: object
+        fields:
+          - name: title
+            label: Заголовок
+            type: string
+            required: true
+          - name: cta
+            label: Кнопка
+            type: string
+          - name: ctaHref
+            label: "⚙️ Ссылка кнопки (техническое, не менять)"
+            type: string
+          - name: image
+            label: Фоновая картинка
+            type: image
+      - name: intro
+        label: Вступительный текст
+        type: object
+        fields:
+          - name: text
+            label: Текст
+            type: text
+            required: true
+      - name: resultsHeading
+        label: Заголовок блока «Результаты»
+        type: string
+      - name: totalWeeks
+        label: Сколько всего недель в курсе
+        type: number
+      - name: weeks
+        label: Программа курса (недели)
+        type: object
+        list: true
+        fields:
+          - name: index
+            label: Номер недели
+            type: number
+          - name: group
+            label: "⚙️ Группа страниц, напр. 1–3 (техническое, не менять)"
+            type: string
+          - name: title
+            label: Название недели
+            type: string
+          - name: days
+            label: Занятия по дням
+            type: object
+            list: true
+            fields:
+              - name: day
+                label: День (ПН / СР / ПТ)
+                type: string
+              - name: text
+                label: Тема занятия
+                type: text
+          - name: tasks
+            label: Задания недели
+            type: object
+            list: true
+            fields:
+              - name: kind
+                label: Тип задания (иконка)
+                type: select
+                options:
+                  values:
+                    - value: doc
+                      label: Документ (письменное ДЗ)
+                    - value: proto
+                      label: Прототип
+                    - value: call
+                      label: Созвон
+              - name: text
+                label: Текст задания
+                type: string
+      - name: teachers
+        label: Преподаватели
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Имя
+            type: string
+            required: true
+          - name: role
+            label: Описание
+            type: text
+          - name: image
+            label: Фото
+            type: image
+          - name: badge
+            label: Плашка (напр. «Главный преподаватель»)
+            type: string
+          - name: imagePosition
+            label: "⚙️ Кадрирование фото (техническое, не менять)"
+            type: string
+      - name: pricing
+        label: Стоимость
+        type: object
+        fields:
+          - name: price
+            label: Цена (как показывается, напр. $589)
+            type: string
+            required: true
+          - name: priceValue
+            label: Цена числом (для расчёта рассрочки)
+            type: number
+            required: true
+          - name: currency
+            label: Значок валюты
+            type: string
+          - name: installments
+            label: На сколько частей рассрочка
+            type: number
+          - name: note
+            label: Приписка под ценой
+            type: string
+          - name: perk
+            label: Бонус (скидка на другие курсы)
+            type: text
+          - name: primaryCta
+            label: Главная кнопка
+            type: string
+          - name: secondaryCta
+            label: Вторая кнопка (открыть рассрочку)
+            type: string
+          - name: installmentCtaLabel
+            label: Кнопка «скрыть рассрочку»
+            type: string
+      - name: faq
+        label: Вопросы и ответы (FAQ)
+        type: object
+        list: true
+        fields:
+          - name: q
+            label: Вопрос
+            type: string
+            required: true
+          - name: a
+            label: Ответ
+            type: text
+            required: true
+      - name: presentation
+        label: Блок «Презентация курса»
+        type: object
+        fields:
+          - name: title
+            label: Заголовок
+            type: string
+          - name: subtext
+            label: Текст
+            type: text
+          - name: cta
+            label: Кнопка презентации
+            type: string
+          - name: url
+            label: Ссылка на презентацию
+            type: string
+          - name: videoCta
+            label: Кнопка видео
+            type: string
+          - name: videoUrl
+            label: Ссылка на видео (YouTube)
+            type: string
+
+  # ── Консультации ─────────────────────────────────────────────────
+  - name: consultations
+    label: Консультации
+    type: file
+    path: content/consultations.json
+    format: json
+    fields:
+      - name: hero
+        label: Первый экран
+        type: object
+        fields:
+          - name: title
+            label: Заголовок
+            type: string
+            required: true
+          - name: subtitle
+            label: Подзаголовок
+            type: string
+          - name: cta
+            label: Кнопка
+            type: string
+          - name: ctaHref
+            label: "⚙️ Ссылка кнопки (техническое, не менять)"
+            type: string
+          - name: image
+            label: Фоновая картинка
+            type: image
+      - name: intro
+        label: Вступительный текст
+        type: object
+        fields:
+          - name: text
+            label: Текст
+            type: text
+      - name: questions
+        label: Вопросы 01–06 (с чем приходят)
+        type: object
+        list: true
+        fields:
+          - name: number
+            label: Номер (01, 02 …)
+            type: string
+          - name: question
+            label: Вопрос
+            type: string
+      - name: teachersHeading
+        label: Заголовок блока «Кто проводит»
+        type: string
+      - name: teachers
+        label: Кто проводит консультации
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Имя
+            type: string
+          - name: role
+            label: Описание
+            type: text
+          - name: image
+            label: Фото
+            type: image
+      - name: servicesHeading
+        label: Заголовок блока «Вместе мы»
+        type: string
+      - name: services
+        label: Карточки «Вместе мы»
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: Заголовок
+            type: string
+          - name: text
+            label: Текст
+            type: text
+      - name: formatsHeading
+        label: Заголовок блока «Форматы услуг»
+        type: string
+      - name: formats
+        label: Форматы услуг
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: Название формата
+            type: string
+          - name: description
+            label: Описание
+            type: text
+          - name: durations
+            label: Переключатель длительности (если есть)
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Надпись (напр. 3 месяца)
+                type: string
+              - name: count
+                label: Сколько консультаций входит
+                type: number
+          - name: extraNote
+            label: Приписка (напр. + обратная связь)
+            type: string
+          - name: audience
+            label: Для кого подходит
+            type: text
+      - name: pricing
+        label: Стоимость
+        type: object
+        fields:
+          - name: price
+            label: Цена (напр. от 299$*)
+            type: string
+          - name: description
+            label: Текст под ценой
+            type: text
+          - name: primaryCta
+            label: Главная кнопка
+            type: object
+            fields:
+              - name: label
+                label: Надпись
+                type: string
+              - name: href
+                label: Ссылка (Telegram)
+                type: string
+          - name: secondaryCta
+            label: Вторая кнопка (письмо)
+            type: object
+            fields:
+              - name: label
+                label: Надпись
+                type: string
+          - name: notes
+            label: Примечания (мелкий текст)
+            type: text
+            list: true
+      - name: faq
+        label: Вопросы и ответы (FAQ)
+        type: object
+        list: true
+        fields:
+          - name: q
+            label: Вопрос
+            type: string
+          - name: a
+            label: Ответ
+            type: text

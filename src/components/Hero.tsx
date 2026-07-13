@@ -1,9 +1,10 @@
+import { Fragment } from "react";
 import Image from "next/image";
 import { ArrowDown } from "lucide-react";
 import Parallax from "@/components/Parallax";
 import MouseParallax from "@/components/MouseParallax";
 import Marquee from "@/components/Marquee";
-import { marqueeItems } from "@/data/content";
+import { home, marqueeItems } from "@/data/content";
 
 export default function Hero() {
   return (
@@ -93,17 +94,18 @@ export default function Hero() {
         {/* Headline + button, positioned in the upper sky area */}
         <div className="absolute inset-x-0 top-[22%] flex flex-col items-center text-center px-4">
           <h1 className="max-w-3xl font-bold leading-[0.986] tracking-[-0.02em] text-white text-fluid-hero">
-            Самая заботливая
-            <br />
-            онлайн-школа, которая учит
-            <br />
-            делать видеоигры
+            {home.heroTitle.split("\n").map((line, i) => (
+              <Fragment key={i}>
+                {i > 0 && <br />}
+                {line}
+              </Fragment>
+            ))}
           </h1>
           <a
             href="#courses"
             className="group mt-8 flex w-full max-w-sm items-center justify-center gap-2.5 rounded-xl bg-white/80 py-2 pl-4 pr-2 text-[14px] text-black backdrop-blur-md transition hover:bg-white md:inline-flex md:w-auto md:max-w-none"
           >
-            <span>Посмотреть все курсы</span>
+            <span>{home.heroCta}</span>
             <span className="grid size-7 place-items-center rounded-lg bg-white text-brand-orange transition-transform group-hover:translate-y-0.5">
               <ArrowDown className="size-4" strokeWidth={2.25} />
             </span>

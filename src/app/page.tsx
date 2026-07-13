@@ -8,7 +8,7 @@ import StickyHeader from "@/components/StickyHeader";
 import Typewriter from "@/components/Typewriter";
 import Footer from "@/components/Footer";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
-import { courses, features, testimonials, studioLogos, socials } from "@/data/content";
+import { courses, features, home, testimonials, studioLogos, socials } from "@/data/content";
 
 // Lowercase, then capitalize the first letter (sentence case, RU-aware).
 const toSentence = (s: string) => {
@@ -34,7 +34,7 @@ export default function Home() {
           {/* Intro lead — scroll-driven word reveal, same weight throughout */}
           <section className="py-16 md:py-28">
             <ScrollWords
-              text="В поддерживающей обстановке вы попрактикуете все навыки гейм-дизайнера, нарративного дизайнера или левел-дизайнера. Сделаете резюме, портфолио из двух игр, документации и будете готовы к настоящей работе в игровой индустрии."
+              text={home.intro}
               className="mx-auto max-w-3xl text-center text-fluid-2xl leading-snug text-foreground"
             />
           </section>
@@ -84,8 +84,7 @@ export default function Home() {
             {/* Heading — left half (left line → center line) */}
             <div className="border-b border-black/10 p-6 md:border-b-0 md:border-r md:p-10">
               <h2 className="text-fluid-4xl leading-tight text-foreground md:sticky md:top-24">
-                Хотите делать инди-игры или работать в больших игровых студиях?
-                Мы поможем!
+                {home.aboutHeading}
               </h2>
             </div>
 
@@ -184,32 +183,30 @@ export default function Home() {
                   Об авторе
                 </p>
                 <h2 className="text-fluid-4xl leading-tight text-foreground">
-                  Алла Довгалюк
+                  {home.author.name}
                 </h2>
                 <p className="text-fluid-sm text-foreground/65">
-                  Основательница школы GDD. Гейм-дизайнер, нарративный дизайнер,
-                  сценарист игр, магистр литературного редактирования.
+                  {home.author.role}
                 </p>
               </div>
 
               {/* Headline stats */}
               <div className="grid grid-cols-2 border-b border-black/10">
-                <div className="border-r border-black/10 p-6 md:p-8">
-                  <p className="text-fluid-3xl tracking-[-0.02em] text-foreground whitespace-nowrap">
-                    12 лет
-                  </p>
-                  <p className="text-fluid-sm text-foreground/60">
-                    в игровой индустрии
-                  </p>
-                </div>
-                <div className="p-6 md:p-8">
-                  <p className="text-fluid-3xl tracking-[-0.02em] text-foreground whitespace-nowrap">
-                    1 000 000+
-                  </p>
-                  <p className="text-fluid-sm text-foreground/60">
-                    играющих в мои проекты
-                  </p>
-                </div>
+                {home.author.stats.map((stat, i) => (
+                  <div
+                    key={stat.label}
+                    className={`p-6 md:p-8 ${
+                      i % 2 === 0 ? "border-r border-black/10" : ""
+                    }`}
+                  >
+                    <p className="text-fluid-3xl tracking-[-0.02em] text-foreground whitespace-nowrap">
+                      {stat.value}
+                    </p>
+                    <p className="text-fluid-sm text-foreground/60">
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
               </div>
 
               {/* Studios */}
@@ -218,7 +215,7 @@ export default function Home() {
                   Работала в студиях
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {["tinyBuild", "BIG FISH", "BELKA GAMES"].map((l) => (
+                  {home.author.studios.map((l) => (
                     <span
                       key={l}
                       className="rounded-lg bg-black/[0.04] px-4 py-2 text-fluid-sm text-black/55"
@@ -283,9 +280,7 @@ export default function Home() {
               <div className="pointer-events-none absolute inset-x-6 bottom-6 z-10 md:inset-x-8 md:bottom-8">
                 <Typewriter
                   loop={false}
-                  texts={[
-                    "Моя цель: обучать хороших людей, которые любят игры и делают игровую индустрию лучше! Я внимательно и с поддержкой разбираю домашние задания, с радостью делюсь своим многолетним опытом в геймдеве, рекомендую своих студентов потенциальным работодателям и остаюсь на связи даже после курса! (смело пишите, я буду рада!).",
-                  ]}
+                  texts={[home.author.mission]}
                   typeSpeed={28}
                   className="font-mono text-fluid-sm leading-relaxed text-white drop-shadow-[0_1px_6px_rgba(0,0,0,0.6)]"
                 />
