@@ -125,7 +125,7 @@ export default function ScheduleCalendar({
                 return (
                   <div
                     key={`${weekIdx}-${dayHeader}`}
-                    className={`relative flex min-h-64 flex-col justify-end border-r border-black/10 bg-white p-4 md:p-5 ${
+                    className={`relative flex min-h-64 flex-col justify-end border-r border-black/10 bg-white p-4 pt-12 md:p-5 md:pt-12 ${
                       isLastRow ? "" : "border-b border-black/10"
                     }`}
                   >
@@ -148,7 +148,7 @@ export default function ScheduleCalendar({
               // Tasks cell (rightmost) — homework (doc + proto merged) + call.
               <div
                 key={`${weekIdx}-tasks`}
-                className={`relative flex min-h-64 flex-col justify-end bg-white p-4 md:p-5 ${
+                className={`relative flex min-h-64 flex-col justify-end bg-white p-4 pt-12 md:p-5 md:pt-12 ${
                   isLastRow ? "" : "border-b border-black/10"
                 }`}
               >
