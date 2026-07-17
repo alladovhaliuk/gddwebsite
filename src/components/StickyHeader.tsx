@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useRafScroll } from "@/hooks/useRafScroll";
+import { courses } from "@/data/content";
 
 export type NavLink = { label: string; href?: string };
 
@@ -19,29 +20,34 @@ const defaultNavLinks: NavLink[] = [
   { label: "Контакты", href: "#alla" },
 ];
 
+// Copy that only exists in the menu; the start date is read from the course
+// content below so editing it in the CMS reaches the menu too.
 const courseMenu = [
   {
     title: "«Нарративщики»",
     desc: "Сюжет, GDD, диалоги и портфолио нарративного гейм-дизайнера.",
-    meta: "Старт 12/01/2026",
+    fallbackMeta: "Идёт набор",
     img: "/img/narrators.png",
     href: "/courses/narrative",
   },
   {
     title: "«Гейм-дизайнеры»",
     desc: "Геймплей, механики, метрики и документы гейм-дизайнера.",
-    meta: "Старт 20/04/2026",
+    fallbackMeta: "Идёт набор",
     img: "/img/gamedesigners.png",
     href: "/courses/game-design",
   },
   {
     title: "Персональные консультации",
     desc: "Разработка, издатель, бюджет и продвижение вашей игры.",
-    meta: "Есть места",
+    fallbackMeta: "Есть места",
     img: "/img/consult.png",
     href: "/courses/consultations",
   },
-];
+].map(({ fallbackMeta, ...item }) => {
+  const startDate = courses.find((c) => c.href === item.href)?.startDate;
+  return { ...item, meta: startDate ? `Старт ${startDate}` : fallbackMeta };
+});
 
 const Chevron = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
