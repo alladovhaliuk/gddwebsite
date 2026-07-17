@@ -5,13 +5,30 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import BookingForm from "@/components/BookingForm";
 
+const bookDescription =
+  "Оставьте контактные данные, мы свяжемся с вами и обсудим участие в курсе.";
+
 export const metadata: Metadata = {
-  title: "Забронировать место | Школа GDD",
-  description:
-    "Оставьте контактные данные, мы свяжемся с вами и обсудим участие в курсе.",
-  // Without this the page inherits the root layout's `canonical: "/"` and
-  // tells crawlers it duplicates the homepage.
+  // The root layout's template appends " | Школа GDD" — don't repeat it here.
+  title: "Забронировать место",
+  description: bookDescription,
+  // Without these the page inherits the root layout's `canonical: "/"` and
+  // `openGraph.url: "/"`, telling crawlers it duplicates the homepage.
   alternates: { canonical: "/book" },
+  openGraph: {
+    title: "Забронировать место | Школа GDD",
+    description: bookDescription,
+    url: "/book",
+    // Declaring `openGraph` replaces the layout's block wholesale rather than
+    // merging into it, so the card has to be repeated here.
+    images: [{ url: "/SEO.jpg", width: 1200, height: 630, alt: "Школа GDD" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Забронировать место | Школа GDD",
+    description: bookDescription,
+    images: ["/SEO.jpg"],
+  },
 };
 
 // Slim header for the booking flow — no nav, no mega menu. Just the logo and
