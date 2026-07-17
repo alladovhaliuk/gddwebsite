@@ -4,6 +4,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import ClickSpark from "@/components/ClickSpark";
 import { contactEmail, socials } from "@/data/content";
+import { Analytics } from "@vercel/analytics/next";
 
 // LINE Seed JP via Google Fonts (v3) — this build has properly proportional
 // Cyrillic, so it renders both Latin and the Russian copy with normal tracking.
@@ -154,6 +155,7 @@ export default function RootLayout({
             {children}
           </ClickSpark>
         </SmoothScroll>
+        <Analytics />
       </body>
     </html>
   );
