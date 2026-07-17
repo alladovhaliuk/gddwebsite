@@ -69,7 +69,9 @@ const courseLd = {
   hasCourseInstance: {
     "@type": "CourseInstance",
     courseMode: "Online",
-    startDate: "2026-01-12",
+    // Year only — the 2027 intake has no confirmed date yet. ISO 8601 allows
+    // reduced precision, so this stays valid rather than inventing a day.
+    startDate: "2027",
     inLanguage: "ru",
   },
 };

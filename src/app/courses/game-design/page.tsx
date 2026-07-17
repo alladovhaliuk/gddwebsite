@@ -68,7 +68,7 @@ const courseLd = {
   hasCourseInstance: {
     "@type": "CourseInstance",
     courseMode: "Online",
-    startDate: "2026-04-20",
+    startDate: "2026-10-19",
     inLanguage: "ru",
   },
 };
