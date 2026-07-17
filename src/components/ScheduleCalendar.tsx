@@ -22,9 +22,15 @@ export const SCHEDULE_PAGE_SIZE = 3;
 export const schedulePageCount = (totalWeeks: number) =>
   Math.ceil(totalWeeks / SCHEDULE_PAGE_SIZE);
 
+// Schedule copy is authored lowercase, so lift the first letter only — terms
+// further in ("twine", "SDT", "Interactive Fiction") keep their own casing.
+const capitalize = (s: string) =>
+  s.replace(/\p{L}/u, (ch) => ch.toLocaleUpperCase("ru"));
+
 function getDayTopic(week: ProgramWeek | undefined, dayHeader: string) {
   // ProgramWeek day labels are uppercase ("ПН"/"СР"/"ПТ"); headers are "Пн"/etc.
-  return week?.days.find((d) => d.day === dayHeader.toUpperCase())?.text;
+  const text = week?.days.find((d) => d.day === dayHeader.toUpperCase())?.text;
+  return text && capitalize(text);
 }
 
 function mergedTasks(week: ProgramWeek | undefined) {
@@ -47,7 +53,7 @@ function mergedTasks(week: ProgramWeek | undefined) {
     merged.push({ kind: "doc", text: proto.text });
   }
   if (call) merged.push({ kind: "call", text: call.text });
-  return merged;
+  return merged.map((t) => ({ ...t, text: capitalize(t.text) }));
 }
 
 export default function ScheduleCalendar({
