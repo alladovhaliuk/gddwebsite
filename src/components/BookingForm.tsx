@@ -322,6 +322,13 @@ export default function BookingForm() {
                   {contactEmail}
                 </a>
               </p>
+              <p className="mt-2 text-center text-fluid-xs text-foreground/45">
+                Отправляя форму, вы соглашаетесь с{" "}
+                <a href="/privacy" className="underline hover:text-foreground/70">
+                  политикой конфиденциальности
+                </a>
+                .
+              </p>
             </div>
           </form>
         )}

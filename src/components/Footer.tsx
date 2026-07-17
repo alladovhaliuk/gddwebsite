@@ -101,7 +101,15 @@ export default function Footer() {
             })}
           </div>
 
-          <p className="text-fluid-sm text-white/55">© 2026 Школа GDD</p>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-fluid-sm text-white/55">
+            <a
+              href="/privacy"
+              className="transition-colors hover:text-white/80"
+            >
+              Политика конфиденциальности
+            </a>
+            <p>© 2026 Школа GDD</p>
+          </div>
         </div>
       </div>
     </footer>
