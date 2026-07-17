@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Game Design & Development — сайт школы
 
-## Getting Started
+Сайт на [Next.js](https://nextjs.org) с тремя страницами курсов, формой записи
+и админкой для редактирования текстов без программиста.
 
-First, run the development server:
+- **Курсы:** гейм-дизайн, нарратив, консультации
+- **Форма записи:** заявки приходят в Telegram
+- **Тексты:** редактируются через [Pages CMS](https://pagescms.org) — без кода
+
+---
+
+## Как редактировать тексты сайта
+
+Весь текст живёт в файлах `content/*.json`. Править их руками не нужно —
+для этого есть админка.
+
+1. Зайти на [app.pagescms.org](https://app.pagescms.org) через свой GitHub-аккаунт
+2. Выбрать этот репозиторий
+3. Отредактировать поля в удобных формах и нажать **Save**
+
+После сохранения Pages CMS делает коммит в репозиторий, Vercel это видит и
+автоматически пересобирает сайт. Изменения появляются через 1–2 минуты.
+
+Какие поля где находятся, описано в файле `.pages.yml` — это схема админки.
+Если нужно добавить новое редактируемое поле, менять надо и `.pages.yml`,
+и соответствующий JSON.
+
+**Картинки** тоже загружаются через админку — они складываются в папку `public`.
+
+---
+
+## Переменные окружения
+
+Скопируйте `.env.example` в `.env.local` и заполните значения:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.example .env.local
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+| Переменная | Зачем | Где взять |
+|---|---|---|
+| `TELEGRAM_BOT_TOKEN` | Чтобы форма записи отправляла заявки | [@BotFather](https://t.me/BotFather) → `/newbot` |
+| `TELEGRAM_CHAT_ID` | В какой чат падают заявки | [@userinfobot](https://t.me/userinfobot) → пришлёт ваш ID |
+| `NEXT_PUBLIC_SITE_URL` | Адрес сайта для sitemap, robots.txt и превью ссылок | Ваш домен, например `https://gdd.school` |
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Без первых двух форма записи покажет пользователю сообщение «Сервер не
+настроен» — сайт при этом работает, но заявки не доходят.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Без `NEXT_PUBLIC_SITE_URL` в sitemap и метатегах будет `localhost:3000` —
+поисковики и превью ссылок в мессенджерах сломаются. На проде задать обязательно.
 
-## Learn More
+### Настройка Telegram-бота с нуля
 
-To learn more about Next.js, take a look at the following resources:
+1. Написать [@BotFather](https://t.me/BotFather), команда `/newbot`, придумать имя
+2. BotFather пришлёт токен вида `123456789:AAE...` — это `TELEGRAM_BOT_TOKEN`
+3. **Написать своему новому боту любое сообщение** — иначе он не сможет вам писать
+4. Узнать свой ID через [@userinfobot](https://t.me/userinfobot) — это `TELEGRAM_CHAT_ID`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Чтобы заявки видели несколько человек — создайте группу, добавьте туда бота
+и используйте ID группы (он начинается с минуса).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+> Токен — это пароль от бота. Не выкладывайте его в репозиторий и не пересылайте
+> в открытых чатах. На Vercel он задаётся в настройках проекта.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Деплой на Vercel
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Импортировать репозиторий на [vercel.com/new](https://vercel.com/new)
+2. **Settings → Environment Variables** — добавить все три переменные из таблицы выше
+3. Deploy
+
+Дальше каждый коммит в ветку `main` (в том числе из админки Pages CMS)
+автоматически обновляет сайт.
+
+---
+
+## Локальная разработка
+
+Нужен [Node.js](https://nodejs.org) версии 20 или новее.
+
+```bash
+npm install      # установить зависимости
+npm run dev      # запустить на http://localhost:3000
+```
+
+Другие команды:
+
+```bash
+npm run build    # собрать прод-версию (полезно проверить перед пушем)
+npm start        # запустить собранную версию
+npm run lint     # проверить код линтером
+```
+
+---
+
+## Структура проекта
+
+```
+content/           тексты сайта (редактируются через админку)
+.pages.yml         схема админки Pages CMS
+src/app/           страницы
+  page.tsx           главная
+  courses/           страницы курсов
+  book/              форма записи + отправка в Telegram
+src/components/    компоненты интерфейса
+src/data/          прослойка: отдаёт JSON из content/ в компоненты
+src/app/globals.css  дизайн-токены: цвета, шрифты, отступы
+public/            картинки, логотипы, иконки
+DESIGN.md          дизайн-система: правила вёрстки и анимаций
+```
+
+Технологии: Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4,
+[Lenis](https://lenis.darkroom.engineering) для плавной прокрутки.
