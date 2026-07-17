@@ -59,13 +59,13 @@ export const metadata: Metadata = {
     title,
     description,
     url: "/",
-    images: [{ url: "/img/herobg.png", width: 1923, height: 900, alt: title }],
+    images: [{ url: "/SEO.jpg", width: 1200, height: 630, alt: title }],
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
-    images: ["/img/herobg.png"],
+    images: ["/SEO.jpg"],
   },
   robots: {
     index: true,

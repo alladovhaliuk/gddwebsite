@@ -34,13 +34,13 @@ export const metadata: Metadata = {
     title: "Персональные консультации по созданию игр | Школа GDD",
     description: pageDescription,
     url: "/courses/consultations",
-    images: [{ url: "/img/consult.png", width: 1280, height: 720, alt: "Персональные консультации по созданию игр" }],
+    images: [{ url: "/SEO.jpg", width: 1200, height: 630, alt: "Персональные консультации по созданию игр" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Персональные консультации по созданию игр | Школа GDD",
     description: pageDescription,
-    images: ["/img/consult.png"],
+    images: ["/SEO.jpg"],
   },
 };
 

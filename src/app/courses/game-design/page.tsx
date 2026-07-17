@@ -35,13 +35,13 @@ export const metadata: Metadata = {
     title: "Курс «Гейм-дизайнеры» | Школа GDD",
     description: courseDescription,
     url: "/courses/game-design",
-    images: [{ url: "/img/gamedesigners.png", width: 1280, height: 720, alt: "Курс «Гейм-дизайнеры»" }],
+    images: [{ url: "/SEO.jpg", width: 1200, height: 630, alt: "Курс «Гейм-дизайнеры»" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Курс «Гейм-дизайнеры» | Школа GDD",
     description: courseDescription,
-    images: ["/img/gamedesigners.png"],
+    images: ["/SEO.jpg"],
   },
 };
 

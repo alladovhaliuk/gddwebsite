@@ -36,13 +36,13 @@ export const metadata: Metadata = {
     title: "Курс «Нарративщики» | Школа GDD",
     description: courseDescription,
     url: "/courses/narrative",
-    images: [{ url: "/img/narrators.png", width: 1280, height: 720, alt: "Курс «Нарративщики»" }],
+    images: [{ url: "/SEO.jpg", width: 1200, height: 630, alt: "Курс «Нарративщики»" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Курс «Нарративщики» | Школа GDD",
     description: courseDescription,
-    images: ["/img/narrators.png"],
+    images: ["/SEO.jpg"],
   },
 };
 
