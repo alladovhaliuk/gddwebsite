@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: "Забронировать место | Школа GDD",
   description:
     "Оставьте контактные данные, мы свяжемся с вами и обсудим участие в курсе.",
+  // Without this the page inherits the root layout's `canonical: "/"` and
+  // tells crawlers it duplicates the homepage.
+  alternates: { canonical: "/book" },
 };
 
 // Slim header for the booking flow — no nav, no mega menu. Just the logo and
