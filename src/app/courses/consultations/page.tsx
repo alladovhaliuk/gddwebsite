@@ -34,13 +34,13 @@ export const metadata: Metadata = {
     title: "Персональные консультации по созданию игр | Школа GDD",
     description: pageDescription,
     url: "/courses/consultations",
-    images: [{ url: "/SEO.jpg", width: 1200, height: 630, alt: "Персональные консультации по созданию игр" }],
+    images: [{ url: "/SEO.webp", width: 1200, height: 630, alt: "Персональные консультации по созданию игр" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Персональные консультации по созданию игр | Школа GDD",
     description: pageDescription,
-    images: ["/SEO.jpg"],
+    images: ["/SEO.webp"],
   },
 };
 
@@ -51,7 +51,7 @@ const serviceLd = {
   description: pageDescription,
   url: "/courses/consultations",
   inLanguage: "ru",
-  image: "/img/consult.png",
+  image: "/img/consult.webp",
   provider: {
     "@type": "EducationalOrganization",
     name: "Школа GDD",

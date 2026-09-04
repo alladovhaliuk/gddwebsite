@@ -20,7 +20,7 @@ export default function Hero() {
             {/* extra vertical bleed so the drift never reveals an edge */}
             <div className="absolute -inset-y-[16%] -inset-x-[3%]">
               <Image
-                src="/img/herobg.png"
+                src="/img/herobg.webp"
                 alt=""
                 fill
                 priority
@@ -38,7 +38,7 @@ export default function Hero() {
         >
           <MouseParallax strength={22} className="absolute inset-0">
             <Image
-              src="/img/cloud02.png"
+              src="/img/cloud02.webp"
               alt=""
               aria-hidden
               width={533}
@@ -46,7 +46,7 @@ export default function Hero() {
               className="absolute left-[-2%] top-[-6%] w-[33%] select-none"
             />
             <Image
-              src="/img/cloud01.png"
+              src="/img/cloud01.webp"
               alt=""
               aria-hidden
               width={578}
@@ -82,7 +82,7 @@ export default function Hero() {
 
         {/* Foreground field object — pinned to the hero bottom (no parallax) */}
         <Image
-          src="/img/object.png"
+          src="/img/object.webp"
           alt=""
           aria-hidden
           width={1440}

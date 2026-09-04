@@ -111,7 +111,7 @@ export default function Home() {
           >
             <MouseParallax strength={6} className="absolute -inset-3">
               <Image
-                src="/img/divider.png"
+                src="/img/divider.webp"
                 alt=""
                 aria-hidden
                 fill
@@ -265,7 +265,7 @@ export default function Home() {
             <div className="relative order-1 min-h-[26rem] overflow-hidden bg-foreground/5 md:order-2 md:min-h-full">
               <MouseParallax strength={4} className="absolute -inset-2">
                 <Image
-                  src="/alla-2.png"
+                  src="/alla-2.webp"
                   alt="Алла Довгалюк"
                   fill
                   sizes="(min-width: 768px) 50vw, 100vw"

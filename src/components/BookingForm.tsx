@@ -35,13 +35,13 @@ const COURSES: CourseOption[] = [
     label: "Нарративщики",
     // Reuse the homepage course-card image — full-resolution painting, much
     // sharper than the wide hero strip.
-    image: homepageCourses[0].image ?? "/img/narrators.png",
+    image: homepageCourses[0].image ?? "/img/narrators.webp",
     pricing: narrativePricing,
   },
   {
     slug: "game-design",
     label: "Гейм-дизайнеры",
-    image: homepageCourses[1].image ?? "/img/gamedesigners.png",
+    image: homepageCourses[1].image ?? "/img/gamedesigners.webp",
     pricing: gameDesignPricing,
   },
 ];
@@ -82,7 +82,7 @@ export default function BookingForm() {
   // Image shown on the left: chosen course's card painting; falls back to
   // the dedicated booking-form painting when no course is selected yet,
   // so the empty state still feels on-brand instead of a blank panel.
-  const heroImage = course?.image ?? "/form_hero.png";
+  const heroImage = course?.image ?? "/form_hero.webp";
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

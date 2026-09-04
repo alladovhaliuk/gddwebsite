@@ -11,7 +11,7 @@ export type CourseHero = {
   subtitle?: string; // optional second line under the headline
   cta: string;
   ctaHref?: string; // defaults to "#pricing"
-  image: string; // path under /public, e.g. "/hero_gamedes.png"
+  image: string; // path under /public, e.g. "/hero_gamedes.webp"
 };
 
 export type CourseIntro = { text: string };

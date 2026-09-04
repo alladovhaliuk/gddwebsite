@@ -87,7 +87,7 @@ export default function ProgramSection({
       >
         <MouseParallax strength={6} className="absolute -inset-3">
           <Image
-            src="/programm.png"
+            src="/programm.webp"
             alt=""
             aria-hidden
             fill

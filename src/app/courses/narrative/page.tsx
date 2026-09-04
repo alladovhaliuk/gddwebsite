@@ -36,13 +36,13 @@ export const metadata: Metadata = {
     title: "Курс «Нарративщики» | Школа GDD",
     description: courseDescription,
     url: "/courses/narrative",
-    images: [{ url: "/SEO.jpg", width: 1200, height: 630, alt: "Курс «Нарративщики»" }],
+    images: [{ url: "/SEO.webp", width: 1200, height: 630, alt: "Курс «Нарративщики»" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Курс «Нарративщики» | Школа GDD",
     description: courseDescription,
-    images: ["/SEO.jpg"],
+    images: ["/SEO.webp"],
   },
 };
 
@@ -53,7 +53,7 @@ const courseLd = {
   description: courseDescription,
   url: "/courses/narrative",
   inLanguage: "ru",
-  image: "/img/narrators.png",
+  image: "/img/narrators.webp",
   provider: {
     "@type": "EducationalOrganization",
     name: "Школа GDD",
@@ -256,7 +256,7 @@ export default function NarrativeCoursePage() {
           {/* ── ПРЕЗЕНТАЦИЯ — full-content-width image card ─── */}
           <section className="relative -mx-6 -mt-20 min-h-[28rem] overflow-hidden border-b border-black/10 md:aspect-[1160/360] md:min-h-0">
             <Image
-              src="/presentation.png"
+              src="/presentation.webp"
               alt=""
               fill
               sizes="(min-width: 1160px) 1160px, 100vw"

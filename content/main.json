@@ -74,7 +74,7 @@
           "text": "Письменное портфолио, личная игра (можете воплотить свой сюжет, мы поможем), командный игровой прототип; готовимся к собеседованиям."
         }
       ],
-      "image": "/img/narrators.png",
+      "image": "/img/narrators.webp",
       "href": "/courses/narrative",
       "overlays": [
         {
@@ -109,7 +109,7 @@
           "text": "Письменное портфолио, личная игра (можете воплотить свой сюжет, мы поможем), командный игровой прототип; готовимся к собеседованиям."
         }
       ],
-      "image": "/img/gamedesigners.png",
+      "image": "/img/gamedesigners.webp",
       "href": "/courses/game-design",
       "overlays": [
         {
@@ -150,7 +150,7 @@
           "text": "Рассчитываем бюджет для вашей игры; маркетинг и продвижение."
         }
       ],
-      "image": "/img/consult.png",
+      "image": "/img/consult.webp",
       "href": "/courses/consultations",
       "overlays": [
         {

@@ -14,13 +14,13 @@ export const metadata: Metadata = {
     title: "Политика конфиденциальности | Школа GDD",
     description,
     url: "/privacy",
-    images: [{ url: "/SEO.jpg", width: 1200, height: 630, alt: "Школа GDD" }],
+    images: [{ url: "/SEO.webp", width: 1200, height: 630, alt: "Школа GDD" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Политика конфиденциальности | Школа GDD",
     description,
-    images: ["/SEO.jpg"],
+    images: ["/SEO.webp"],
   },
 };
 

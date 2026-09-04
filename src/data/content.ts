@@ -32,7 +32,7 @@ export const testimonials: { name: string; text: string }[] = main.testimonials;
 // need inverting so they read as gray on the light background.
 const lightLogos = new Set([6, 10]);
 export const studioLogos = Array.from({ length: 18 }, (_, i) => ({
-  src: `/img/logos/logo-${i + 1}.png`,
+  src: `/img/logos/logo-${i + 1}.webp`,
   light: lightLogos.has(i + 1),
 }));
 

@@ -25,7 +25,7 @@ export default function Footer() {
     <footer className="relative isolate overflow-hidden text-white">
       {/* Painterly night wheat-field backdrop */}
       <Image
-        src="/footer.png"
+        src="/footer.webp"
         alt=""
         aria-hidden
         fill
