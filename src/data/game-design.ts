@@ -35,3 +35,6 @@ export const gameDesignPricing: Pricing = data.pricing;
 export const gameDesignFaq: FaqItem[] = data.faq;
 
 export const gameDesignPresentation: Presentation = data.presentation;
+
+export const gameDesignTestimonials: { name: string; text: string }[] =
+  data.testimonials;

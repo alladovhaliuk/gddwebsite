@@ -12,7 +12,7 @@ import ProgramSection from "@/components/ProgramSection";
 import PricingPanel from "@/components/PricingPanel";
 import ScrollWords from "@/components/ScrollWords";
 import Marquee from "@/components/Marquee";
-import { features, testimonials, courses, studioLogos } from "@/data/content";
+import { features, courses, studioLogos } from "@/data/content";
 import {
   gameDesignHero,
   gameDesignIntro,
@@ -22,6 +22,7 @@ import {
   gameDesignTeachers,
   gameDesignPricing,
   gameDesignFaq,
+  gameDesignTestimonials,
 } from "@/data/game-design";
 
 const courseDescription =
@@ -254,7 +255,7 @@ export default function GameDesignCoursePage() {
           {/* ── ОТЗЫВЫ ──────────────────────────────────────── */}
           <section id="testimonials" className="-mt-20 scroll-mt-28">
             <div className="-mx-6 border-x border-b border-black/10">
-              <TestimonialsCarousel items={testimonials} />
+              <TestimonialsCarousel items={gameDesignTestimonials} />
             </div>
           </section>
 

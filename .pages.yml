@@ -344,6 +344,19 @@ content:
           - name: videoUrl
             label: Ссылка на видео (YouTube)
             type: string
+      - name: testimonials
+        label: Отзывы
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Имя
+            type: string
+            required: true
+          - name: text
+            label: Текст отзыва
+            type: text
+            required: true
 
   # ── Курс «Гейм-дизайнеры» ────────────────────────────────────────
   - name: game-design
@@ -516,6 +529,19 @@ content:
           - name: videoUrl
             label: Ссылка на видео (YouTube)
             type: string
+      - name: testimonials
+        label: Отзывы
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Имя
+            type: string
+            required: true
+          - name: text
+            label: Текст отзыва
+            type: text
+            required: true
 
   # ── Консультации ─────────────────────────────────────────────────
   - name: consultations

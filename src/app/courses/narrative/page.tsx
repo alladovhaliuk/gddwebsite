@@ -12,7 +12,7 @@ import ProgramSection from "@/components/ProgramSection";
 import PricingPanel from "@/components/PricingPanel";
 import ScrollWords from "@/components/ScrollWords";
 import Marquee from "@/components/Marquee";
-import { features, testimonials, courses, studioLogos } from "@/data/content";
+import { features, courses, studioLogos } from "@/data/content";
 import {
   narrativeHero,
   narrativeIntro,
@@ -23,6 +23,7 @@ import {
   pricing,
   faq,
   presentation,
+  narrativeTestimonials,
 } from "@/data/narrative";
 
 const courseDescription =
@@ -249,7 +250,7 @@ export default function NarrativeCoursePage() {
           {/* ── ОТЗЫВЫ ──────────────────────────────────────── */}
           <section id="testimonials" className="-mt-20 scroll-mt-28">
             <div className="-mx-6 border-x border-b border-black/10">
-              <TestimonialsCarousel items={testimonials} />
+              <TestimonialsCarousel items={narrativeTestimonials} />
             </div>
           </section>
 
