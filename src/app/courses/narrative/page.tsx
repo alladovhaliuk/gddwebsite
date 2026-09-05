@@ -10,7 +10,6 @@ import FaqAccordion from "@/components/FaqAccordion";
 import CourseCard from "@/components/CourseCard";
 import ProgramSection from "@/components/ProgramSection";
 import PricingPanel from "@/components/PricingPanel";
-import ScrollWords from "@/components/ScrollWords";
 import Marquee from "@/components/Marquee";
 import { features, courses, studioLogos } from "@/data/content";
 import {
@@ -115,7 +114,7 @@ export default function NarrativeCoursePage() {
   return (
     <>
       <StickyHeader navLinks={courseNavLinks} />
-      <CourseHero hero={narrativeHero} armatureIndex={0} />
+      <CourseHero hero={narrativeHero} armatureIndex={0} scene="narrative" body={narrativeIntro.text} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(courseLd) }}
@@ -129,15 +128,7 @@ export default function NarrativeCoursePage() {
           <span className="absolute inset-y-0 right-0 w-[0.5px] bg-current" />
         </div>
 
-        <div className="relative mx-auto flex max-w-[1160px] flex-col gap-20 px-6 pt-16">
-          {/* ── ВСТУПЛЕНИЕ — scroll-driven word reveal (как на главной) ── */}
-          <section className="py-16 md:py-28">
-            <ScrollWords
-              text={narrativeIntro.text}
-              className="mx-auto max-w-3xl text-center text-fluid-2xl leading-snug text-foreground"
-            />
-          </section>
-
+        <div className="relative mx-auto flex max-w-[1160px] flex-col gap-20 px-6">
           {/* ── СТУДИИ (logo marquee) ─────────────────────── */}
           <section className="-mx-6 flex items-stretch border-y border-black/10 text-foreground">
             <div className="flex max-w-[9.5rem] shrink-0 items-center border-r border-black/10 px-6 text-fluid-sm leading-tight text-foreground/70">

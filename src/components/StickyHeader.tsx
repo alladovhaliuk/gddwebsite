@@ -27,21 +27,21 @@ const courseMenu = [
     title: "«Нарративщики»",
     desc: "Сюжет, GDD, диалоги и портфолио нарративного гейм-дизайнера.",
     fallbackMeta: "Идёт набор",
-    img: "/img/narrators.webp",
+    img: "/img/menu/narrative.webp",
     href: "/courses/narrative",
   },
   {
     title: "«Гейм-дизайнеры»",
     desc: "Геймплей, механики, метрики и документы гейм-дизайнера.",
     fallbackMeta: "Идёт набор",
-    img: "/img/gamedesigners.webp",
+    img: "/img/menu/gamedesign.webp",
     href: "/courses/game-design",
   },
   {
     title: "Персональные консультации",
     desc: "Разработка, издатель, бюджет и продвижение вашей игры.",
     fallbackMeta: "Есть места",
-    img: "/img/consult.webp",
+    img: "/img/menu/consultations.webp",
     href: "/courses/consultations",
   },
 ].map(({ fallbackMeta, ...item }) => {
@@ -199,9 +199,9 @@ export default function StickyHeader({
                       alt={c.title}
                       fill
                       sizes="(max-width: 768px) 100vw, 360px"
-                      className="object-cover object-top transition-transform duration-300 group-hover/card:scale-105"
+                      className="object-cover object-[center_22%] transition-transform duration-300 group-hover/card:scale-105"
                     />
-                    <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full bg-white/95 px-4 py-1.5 text-[12px] font-medium text-foreground shadow-sm backdrop-blur">
+                    <span className="absolute bottom-3 left-3 whitespace-nowrap rounded-full bg-white/95 px-4 py-1.5 text-[12px] font-medium text-foreground shadow-sm backdrop-blur">
                       {c.meta}
                     </span>
                   </span>

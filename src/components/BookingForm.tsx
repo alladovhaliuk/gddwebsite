@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { ArrowRight, Check } from "lucide-react";
-import { contactEmail, courses as homepageCourses } from "@/data/content";
+import { contactEmail } from "@/data/content";
+import CourseScene from "@/components/CourseScene";
 import { pricing as narrativePricing } from "@/data/narrative";
 import { gameDesignPricing } from "@/data/game-design";
 import type { Pricing } from "@/data/types";
@@ -25,7 +25,7 @@ type CourseSlug = "narrative" | "game-design";
 type CourseOption = {
   slug: CourseSlug;
   label: string;
-  image: string;
+  scene: string;
   pricing: Pricing;
 };
 
@@ -33,15 +33,14 @@ const COURSES: CourseOption[] = [
   {
     slug: "narrative",
     label: "Нарративщики",
-    // Reuse the homepage course-card image — full-resolution painting, much
-    // sharper than the wide hero strip.
-    image: homepageCourses[0].image ?? "/img/narrators.webp",
+    // Live layered scene (same as the course cards / hero).
+    scene: "narrative",
     pricing: narrativePricing,
   },
   {
     slug: "game-design",
     label: "Гейм-дизайнеры",
-    image: homepageCourses[1].image ?? "/img/gamedesigners.webp",
+    scene: "game-design",
     pricing: gameDesignPricing,
   },
 ];
@@ -79,10 +78,6 @@ export default function BookingForm() {
     ? Math.round(course.pricing.priceValue / parts)
     : null;
 
-  // Image shown on the left: chosen course's card painting; falls back to
-  // the dedicated booking-form painting when no course is selected yet,
-  // so the empty state still feels on-brand instead of a blank panel.
-  const heroImage = course?.image ?? "/form_hero.webp";
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -111,24 +106,12 @@ export default function BookingForm() {
     <main id="main" className="grid h-full bg-white text-foreground md:grid-cols-2">
       {/* Left — course hero painting, fixed full-height column. Stays put
           while the right column scrolls. */}
-      <aside className="relative isolate hidden overflow-hidden border-r border-black/10 bg-cream md:block">
-        {heroImage ? (
-          <Image
-            src={heroImage}
-            alt=""
-            fill
-            sizes="50vw"
-            className="object-cover"
-            priority
-          />
-        ) : (
-          <div className="flex h-full items-center justify-center p-12 text-center">
-            <p className="max-w-sm text-fluid-2xl leading-snug text-foreground/55">
-              Выберите курс справа, и мы подскажем следующие шаги.
-            </p>
-          </div>
-        )}
-        <div className="pointer-events-none absolute inset-0 bg-black/10" />
+      <aside
+        data-mouse-parallax-root
+        className="relative isolate hidden overflow-hidden border-r border-black/10 bg-cream md:block"
+      >
+        <CourseScene scene={course?.scene ?? "hero"} />
+        <div className="pointer-events-none absolute inset-0 z-[5] bg-black/10" />
         <div className="absolute inset-x-0 bottom-0 z-10 flex flex-col items-start gap-3 p-8 text-white md:p-12">
           <span className="rounded-full border border-white/40 bg-white/15 px-4 py-2 text-fluid-sm text-white backdrop-blur-md">
             Забронировать место

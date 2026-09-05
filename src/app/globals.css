@@ -295,3 +295,8 @@ html.lenis body {
   background: radial-gradient(ellipse 6% 1.8% at 27.3% 91%, rgba(0, 0, 0, 0.34), rgba(0, 0, 0, 0) 70%);
 }
 @media (prefers-reduced-motion: reduce) { .die-roll-cons { animation: none; } }
+
+/* Die spin whose transform-origin is set at runtime by SpinDie (works in any
+   container aspect — course card or the wider course-hero cell). */
+.die-spin { animation: dieSpin 4.5s linear infinite; will-change: transform; }
+@media (prefers-reduced-motion: reduce) { .die-spin { animation: none; } }

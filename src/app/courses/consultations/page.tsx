@@ -6,7 +6,6 @@ import CourseHero from "@/components/CourseHero";
 import TeachersCarousel from "@/components/TeachersCarousel";
 import FaqAccordion from "@/components/FaqAccordion";
 import CourseCard from "@/components/CourseCard";
-import ScrollWords from "@/components/ScrollWords";
 import { courses } from "@/data/content";
 import ConsultationsFormats from "@/components/ConsultationsFormats";
 import {
@@ -94,7 +93,7 @@ export default function ConsultationsPage() {
   return (
     <>
       <StickyHeader navLinks={courseNavLinks} />
-      <CourseHero hero={consultationsHero} armatureIndex={2} />
+      <CourseHero hero={consultationsHero} armatureIndex={2} scene="consultations" body={consultationsIntro.text} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }}
@@ -108,21 +107,13 @@ export default function ConsultationsPage() {
           <span className="absolute inset-y-0 right-0 w-[0.5px] bg-current" />
         </div>
 
-        <div className="relative mx-auto flex max-w-[1160px] flex-col gap-20 px-6 pt-16">
-          {/* ── ВСТУПЛЕНИЕ — scroll-driven word reveal ─────────────── */}
-          <section id="questions" className="scroll-mt-28 py-16 md:py-28">
-            <ScrollWords
-              text={consultationsIntro.text}
-              className="mx-auto block max-w-3xl text-center text-fluid-2xl leading-snug text-foreground"
-            />
-          </section>
-
+        <div className="relative mx-auto flex max-w-[1160px] flex-col gap-20 px-6">
           {/* ── ВОПРОСЫ — 2×3 numbered grid, full content width.
               Each card is split into a number cell (left, with diagonal-stripe
               bg + right hairline) and a text cell (right), so the number
               container reads as part of the page's grid the way the schedule
               calendar's icon tiles do. */}
-          <section className="-mx-6 -mt-20 grid border-y border-black/10 sm:grid-cols-2">
+          <section id="questions" className="-mx-6 scroll-mt-28 grid border-y border-black/10 sm:grid-cols-2">
             {consultationsQuestions.map((q) => (
               <div
                 key={q.number}
