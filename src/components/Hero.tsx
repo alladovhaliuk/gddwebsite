@@ -4,96 +4,100 @@ import { ArrowDown } from "lucide-react";
 import Parallax from "@/components/Parallax";
 import MouseParallax from "@/components/MouseParallax";
 import Marquee from "@/components/Marquee";
+import SceneReveal from "@/components/SceneReveal";
 import { home, marqueeItems } from "@/data/content";
+
+// Layered hero scene ("Главная 1"). Every layer is exported from the source
+// PSD at the full 5320×2492 canvas, so each one sits at inset-0 and lines up
+// automatically. Depth comes from grouping the layers into planes and giving
+// each plane its own scroll + mouse parallax.
+const LAYER = "absolute inset-0 h-full w-full object-cover select-none";
 
 export default function Hero() {
   return (
     <section className="relative isolate overflow-hidden">
-      {/* Full-width image at its natural aspect ratio (taller image) */}
       <div
         data-mouse-parallax-root
-        className="relative w-full aspect-[1923/900] min-h-[480px]"
+        className="relative w-full aspect-[5320/2492] min-h-[480px]"
       >
-        {/* Background sky/field — scroll parallax + tiny mouse tilt */}
-        <Parallax speed={0.18} className="absolute inset-0 z-0">
-          <MouseParallax strength={8} className="absolute inset-0">
-            {/* extra vertical bleed so the drift never reveals an edge */}
-            <div className="absolute -inset-y-[16%] -inset-x-[3%]">
+       <SceneReveal className="absolute inset-0">
+        {/* ── Ground plane: sky/hills + coin-path — slow scroll, tiny tilt ── */}
+        <Parallax speed={0.16} className="absolute inset-0 z-0">
+          <MouseParallax strength={6} className="absolute inset-0">
+            <div className="absolute -inset-y-[10%] -inset-x-[3%]">
               <Image
-                src="/img/herobg.webp"
+                src="/img/hero1/bg.webp"
                 alt=""
                 fill
                 priority
-                unoptimized
-                className="object-cover object-bottom"
+                sizes="100vw"
+                className={LAYER + " object-bottom"}
+              />
+              <Image
+                src="/img/hero1/dots.webp"
+                alt=""
+                aria-hidden
+                fill
+                sizes="100vw"
+                className={LAYER + " object-bottom"}
               />
             </div>
           </MouseParallax>
         </Parallax>
 
-        {/* Foreground clouds — scroll up + a stronger mouse tilt for depth */}
-        <Parallax
-          speed={-0.08}
-          className="pointer-events-none absolute inset-0 z-[1]"
-        >
-          <MouseParallax strength={22} className="absolute inset-0">
+        {/* ── Subject: light burst + cart + glowing blocks — medium tilt ── */}
+        <Parallax speed={0.06} className="pointer-events-none absolute inset-0 z-[2]">
+          <MouseParallax strength={14} className="absolute inset-0">
+            {/* soft pulsing glow behind the cart */}
             <Image
-              src="/img/cloud02.webp"
+              src="/img/hero1/light.webp"
               alt=""
               aria-hidden
-              width={533}
-              height={501}
-              className="absolute left-[-2%] top-[-6%] w-[33%] select-none"
+              fill
+              sizes="100vw"
+              className={LAYER + " hero-glow"}
             />
-            <Image
-              src="/img/cloud01.webp"
-              alt=""
-              aria-hidden
-              width={578}
-              height={506}
-              className="absolute right-[-2%] top-0 w-[34%] select-none"
-            />
+            <Image src="/img/hero1/shadow.webp" alt="" aria-hidden fill sizes="100vw" className={LAYER} />
+            <Image src="/img/hero1/horse.webp" alt="" aria-hidden fill sizes="100vw" className={LAYER} />
+            {/* small light glints + floating tetromino cubes */}
+            <Image src="/img/hero1/light4.webp" alt="" aria-hidden fill sizes="100vw" className={LAYER + " hero-glow"} />
+            <Image src="/img/hero1/cube4.webp" alt="" aria-hidden fill sizes="100vw" className={LAYER + " hero-float hero-float-a"} />
+            <Image src="/img/hero1/light3.webp" alt="" aria-hidden fill sizes="100vw" className={LAYER + " hero-glow"} />
+            <Image src="/img/hero1/cube3.webp" alt="" aria-hidden fill sizes="100vw" className={LAYER + " hero-float hero-float-b"} />
+            <Image src="/img/hero1/light2.webp" alt="" aria-hidden fill sizes="100vw" className={LAYER + " hero-glow"} />
+            <Image src="/img/hero1/cube2.webp" alt="" aria-hidden fill sizes="100vw" className={LAYER + " hero-float hero-float-c"} />
+            <Image src="/img/hero1/light1.webp" alt="" aria-hidden fill sizes="100vw" className={LAYER + " hero-glow"} />
+            <Image src="/img/hero1/cube1.webp" alt="" aria-hidden fill sizes="100vw" className={LAYER + " hero-float hero-float-d"} />
           </MouseParallax>
         </Parallax>
 
-        {/* Column guides + arcs (Figma "Group 1"), white over the hero */}
-        <Parallax
-          speed={0.18}
-          className="pointer-events-none absolute inset-0 z-[2]"
-        >
-          <div className="absolute inset-0 mx-auto max-w-[1160px] text-white/55">
-            <svg
-              aria-hidden
-              className="absolute inset-0 h-full w-full"
-              viewBox="0 0 1156 809"
-              preserveAspectRatio="none"
-              fill="none"
-            >
-              <g stroke="currentColor" strokeWidth="0.5">
-                <ellipse cx="578" cy="12" rx="578" ry="439" />
-                <ellipse cx="578" cy="889" rx="578" ry="439" />
-              </g>
-            </svg>
-            <span className="absolute -inset-y-[16%] left-0 w-[0.5px] bg-current" />
-            <span className="absolute -inset-y-[16%] left-1/2 hidden -translate-x-1/2 w-[0.5px] bg-current md:block" />
-            <span className="absolute -inset-y-[16%] right-0 w-[0.5px] bg-current" />
-          </div>
+        {/* ── Foreground: big die + grass tufts — strongest tilt ── */}
+        <Parallax speed={-0.04} className="pointer-events-none absolute inset-0 z-[3]">
+          <MouseParallax strength={22} className="absolute inset-0">
+            <div className="absolute -inset-x-[2%] -inset-y-[3%]">
+              <Image src="/img/hero1/dice.webp" alt="" aria-hidden fill sizes="100vw" className={LAYER} />
+              <Image src="/img/hero1/grass.webp" alt="" aria-hidden fill sizes="100vw" className={LAYER + " object-bottom"} />
+            </div>
+          </MouseParallax>
         </Parallax>
 
-        {/* Foreground field object — pinned to the hero bottom (no parallax) */}
-        <Image
-          src="/img/object.webp"
-          alt=""
-          aria-hidden
-          width={1440}
-          height={367}
-          unoptimized
-          className="pointer-events-none absolute inset-x-0 -bottom-[11%] z-10 h-auto w-full select-none"
-        />
+        {/* ── Clouds — drift upward on scroll, strong tilt ── */}
+        <Parallax speed={-0.1} className="pointer-events-none absolute inset-0 z-[4]">
+          <MouseParallax strength={26} className="absolute inset-0">
+            <div className="absolute -inset-[4%]">
+              <Image src="/img/hero1/clouds.webp" alt="" aria-hidden fill sizes="100vw" className={LAYER} />
+            </div>
+          </MouseParallax>
+        </Parallax>
+
+        {/* ── Column guides + arcs (baked into the artwork) ── */}
+        <Parallax speed={0.16} className="pointer-events-none absolute inset-0 z-[5]">
+          <Image src="/img/hero1/lines.webp" alt="" aria-hidden fill sizes="100vw" className={LAYER} />
+        </Parallax>
 
         {/* Headline + button, positioned in the upper sky area */}
-        <div className="absolute inset-x-0 top-[22%] flex flex-col items-center text-center px-4">
-          <h1 className="max-w-3xl font-bold leading-[0.986] tracking-[-0.02em] text-white text-fluid-hero">
+        <div className="absolute inset-x-0 top-[20%] z-20 flex flex-col items-center text-center px-4">
+          <h1 className="max-w-3xl font-bold leading-[0.986] tracking-[-0.02em] text-white text-fluid-hero [text-shadow:0_2px_18px_rgba(0,0,0,0.28)]">
             {home.heroTitle.split("\n").map((line, i) => (
               <Fragment key={i}>
                 {i > 0 && <br />}
@@ -127,6 +131,7 @@ export default function Hero() {
             />
           </div>
         </div>
+       </SceneReveal>
       </div>
     </section>
   );

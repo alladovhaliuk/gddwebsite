@@ -17,6 +17,9 @@ export type Course = {
   href?: string; // course landing page; falls back to "#" when absent
   // cycling typewriter blocks over the image; `pos` = position/size classes
   overlays?: { lines: string[]; pos: string }[];
+  // optional layered/animated scene key (see CourseScene); replaces the flat
+  // `image` in the card when set.
+  scene?: string;
 };
 
 // Homepage copy (hero, intro lead, about heading, author block).

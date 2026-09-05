@@ -1,5 +1,9 @@
 import Image from "next/image";
+import MouseParallax from "@/components/MouseParallax";
+import SceneReveal from "@/components/SceneReveal";
 import { contactEmail, socials } from "@/data/content";
+
+const SCENE = "absolute inset-0 h-full w-full object-cover select-none";
 
 const footerLinks = [
   { label: "Курсы", href: "#" },
@@ -22,21 +26,44 @@ const contactIcons = [
 
 export default function Footer() {
   return (
-    <footer className="relative isolate overflow-hidden text-white">
-      {/* Painterly night wheat-field backdrop */}
-      <Image
-        src="/footer.webp"
-        alt=""
-        aria-hidden
-        fill
-        sizes="100vw"
-        className="-z-10 object-cover object-center"
-      />
-      {/* Legibility scrim — darkest toward the lighter wheat at the bottom */}
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 bg-gradient-to-b from-black/25 via-black/30 to-black/60"
-      />
+    <footer
+      data-mouse-parallax-root
+      className="relative isolate overflow-hidden bg-[#141327] text-white"
+    >
+      {/* Layered night-castle backdrop (главная 3). Dark bg keeps the copy
+          legible before the scene fades in. */}
+      <SceneReveal className="absolute inset-0 -z-10">
+        {/* Backdrop — sky, clouds, castle, grass, road */}
+        <MouseParallax strength={3} className="absolute inset-0">
+          <div className="absolute -inset-[2%]">
+            <Image src="/img/footer/sky.webp" alt="" fill sizes="100vw" className={SCENE} />
+            <Image src="/img/footer/clouds.webp" alt="" fill sizes="100vw" className={SCENE} />
+            <Image src="/img/footer/castle.webp" alt="" fill sizes="100vw" className={SCENE} />
+            <Image src="/img/footer/grass.webp" alt="" fill sizes="100vw" className={SCENE} />
+            <Image src="/img/footer/road.webp" alt="" fill sizes="100vw" className={SCENE} />
+          </div>
+        </MouseParallax>
+        {/* Poppies — split into clusters, gentle staggered wind sway */}
+        <MouseParallax strength={10} className="absolute inset-0">
+          <div className="absolute -inset-[2%]">
+            <Image src="/img/footer/flowers_l.webp" alt="" fill sizes="100vw" className={SCENE + " wind-soft wind-soft-a"} />
+            <Image src="/img/footer/flowers_m.webp" alt="" fill sizes="100vw" className={SCENE + " wind-soft wind-soft-c"} />
+            <Image src="/img/footer/flowers_r.webp" alt="" fill sizes="100vw" className={SCENE + " wind-soft wind-soft-d"} />
+            <Image src="/img/footer/grass1.webp" alt="" fill sizes="100vw" className={SCENE + " wind-soft wind-soft-b"} />
+            <Image src="/img/footer/grass2.webp" alt="" fill sizes="100vw" className={SCENE + " wind-soft wind-soft-a"} />
+          </div>
+        </MouseParallax>
+        {/* Stars — each rotates slowly left↔right around its own centre */}
+        <MouseParallax strength={6} className="absolute inset-0">
+          <div className="absolute -inset-[2%]">
+            <Image src="/img/footer/star_l.webp" alt="" fill sizes="100vw" className={SCENE + " star-rock star-rock-a"} style={{ transformOrigin: "18.4% 35.9%" }} />
+            <Image src="/img/footer/star_m.webp" alt="" fill sizes="100vw" className={SCENE + " star-rock star-rock-b"} style={{ transformOrigin: "46.2% 25.2%" }} />
+            <Image src="/img/footer/star_r.webp" alt="" fill sizes="100vw" className={SCENE + " star-rock star-rock-c"} style={{ transformOrigin: "78.3% 40.6%" }} />
+          </div>
+        </MouseParallax>
+        {/* Legibility scrim */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/25 to-black/55" />
+      </SceneReveal>
 
       <div className="mx-auto flex max-w-[1160px] flex-col gap-12 px-6 py-16 md:py-24">
         {/* Brand + nav */}

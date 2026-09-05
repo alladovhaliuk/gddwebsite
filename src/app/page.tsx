@@ -4,6 +4,7 @@ import CourseCard from "@/components/CourseCard";
 import Marquee from "@/components/Marquee";
 import MouseParallax from "@/components/MouseParallax";
 import ScrollWords from "@/components/ScrollWords";
+import SceneReveal from "@/components/SceneReveal";
 import StickyHeader from "@/components/StickyHeader";
 import Typewriter from "@/components/Typewriter";
 import Footer from "@/components/Footer";
@@ -107,17 +108,34 @@ export default function Home() {
           {/* ── DIVIDER (poppy meadow) ────────────────────── */}
           <div
             data-mouse-parallax-root
-            className="relative z-20 -mx-6 -mt-20 aspect-[3168/470] overflow-hidden"
+            className="relative z-20 -mx-6 -mt-20 aspect-[5375/825] overflow-hidden"
           >
-            <MouseParallax strength={6} className="absolute -inset-3">
-              <Image
-                src="/img/divider.webp"
-                alt=""
-                aria-hidden
-                fill
-                className="object-cover"
-              />
+            <SceneReveal className="absolute inset-0">
+            {/* Backdrop — sky, clouds, base grass; tiny parallax drift */}
+            <MouseParallax strength={1.5} className="absolute inset-0">
+              <div className="absolute -inset-[2%]">
+                <Image src="/img/divider2/sky.webp" alt="" aria-hidden fill sizes="100vw" className="absolute inset-0 h-full w-full object-cover" />
+                <Image src="/img/divider2/clouds.webp" alt="" aria-hidden fill sizes="100vw" className="absolute inset-0 h-full w-full object-cover" />
+                <Image src="/img/divider2/grass_base.webp" alt="" aria-hidden fill sizes="100vw" className="absolute inset-0 h-full w-full object-cover" />
+              </div>
             </MouseParallax>
+            {/* Sword + fluttering ribbon */}
+            <MouseParallax strength={3} className="absolute inset-0">
+              <Image src="/img/divider2/sword.webp" alt="" aria-hidden fill sizes="100vw" className="absolute inset-0 h-full w-full object-cover" />
+              <Image src="/img/divider2/ribbon.webp" alt="" aria-hidden fill sizes="100vw" className="absolute inset-0 h-full w-full object-cover divider-sway" />
+            </MouseParallax>
+            {/* Poppies — split into clusters so each sways on its own timing
+                (staggered, not in unison); wind on the images, parallax on wrapper */}
+            <MouseParallax strength={4} className="absolute inset-0">
+              <Image src="/img/divider2/flowers_l.webp" alt="" aria-hidden fill sizes="100vw" className="absolute inset-0 h-full w-full object-cover wind-sway wind-sway-a" />
+              <Image src="/img/divider2/flowers_m.webp" alt="" aria-hidden fill sizes="100vw" className="absolute inset-0 h-full w-full object-cover wind-sway wind-sway-c" />
+              <Image src="/img/divider2/flowers_r.webp" alt="" aria-hidden fill sizes="100vw" className="absolute inset-0 h-full w-full object-cover wind-sway wind-sway-d" />
+            </MouseParallax>
+            {/* Foreground grass — closest, strongest parallax */}
+            <MouseParallax strength={6} className="absolute inset-0">
+              <Image src="/img/divider2/grass_front.webp" alt="" aria-hidden fill sizes="100vw" className="absolute inset-0 h-full w-full object-cover object-bottom wind-sway wind-sway-b" />
+            </MouseParallax>
+            </SceneReveal>
 
             {/* rule-of-thirds composition schema */}
             <svg
@@ -172,7 +190,6 @@ export default function Home() {
           {/* ── ОБ АВТОРЕ ─────────────────────────────────── */}
           <section
             id="alla"
-            data-mouse-parallax-root
             className="scroll-mt-28 -mx-6 -mt-20 grid border-b border-black/10 md:grid-cols-2"
           >
             {/* Experience — left half, cells stacked on the column lines */}
@@ -263,15 +280,13 @@ export default function Home() {
 
             {/* Photo — right half, with the mission typed over it */}
             <div className="relative order-1 min-h-[26rem] overflow-hidden bg-foreground/5 md:order-2 md:min-h-full">
-              <MouseParallax strength={4} className="absolute -inset-2">
-                <Image
-                  src="/alla-2.webp"
-                  alt="Алла Довгалюк"
-                  fill
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  className="object-cover object-[center_22%]"
-                />
-              </MouseParallax>
+              <Image
+                src="/alla-author.webp"
+                alt="Алла Довгалюк"
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover object-[32%_center]"
+              />
 
               {/* Legibility scrim for the typed text */}
               <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />

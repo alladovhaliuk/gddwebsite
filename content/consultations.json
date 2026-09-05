@@ -40,12 +40,14 @@
     {
       "name": "Алла Довгалюк",
       "role": "Гейм-дизайнер, нарративный дизайнер, сценарист игр, основатель школы GDD, преподаватель. Работала с такими игровыми студиями и издательствами с 2013 г. (Big Fish Games, Belka Games, tinyBuild…).",
-      "image": "/alla-2.webp"
+      "image": "/alla-2.webp",
+      "imagePosition": "35% 25%"
     },
     {
       "name": "Александр Лавришко",
       "role": "Игровой продюсер. Работал с такими игровыми студиями и издательствами с 2015 (101xp, Belka Games, Saber Interactive, Saber Porto…). Самые популярные игры портфолио: Snow Runner, Expeditions: A MudRunner Game. Специализация: продюсирование, бизнес-модели, взаимодействие с издателями, инвесторами и платформами.",
-      "image": "/alex.webp"
+      "image": "/alex.webp",
+      "imagePosition": "center 12%"
     }
   ],
   "servicesHeading": "Вместе мы:",

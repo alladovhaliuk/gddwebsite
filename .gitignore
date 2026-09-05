@@ -43,3 +43,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# large source material for the illustrated scenes (PSD slices, video .rar) — keep out of git
+public/archives/

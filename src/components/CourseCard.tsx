@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import MouseParallax from "@/components/MouseParallax";
 import Typewriter from "@/components/Typewriter";
+import CourseScene from "@/components/CourseScene";
 import type { Course } from "@/data/content";
 
 /**
@@ -25,17 +26,21 @@ export default function CourseCard({
         imageLeft ? "md:order-1" : "md:order-2 md:border-l md:border-black/10"
       }`}
     >
-      {course.image && (
-        <MouseParallax strength={5} className="absolute -inset-2">
-          <Image
-            src={course.image}
-            alt=""
-            aria-hidden
-            fill
-            sizes="(min-width: 768px) 50vw, 100vw"
-            className="object-cover"
-          />
-        </MouseParallax>
+      {course.scene ? (
+        <CourseScene scene={course.scene} />
+      ) : (
+        course.image && (
+          <MouseParallax strength={5} className="absolute -inset-2">
+            <Image
+              src={course.image}
+              alt=""
+              aria-hidden
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="object-cover"
+            />
+          </MouseParallax>
+        )
       )}
 
       {/* Cycling typewriter overlays (cards that define them) */}
@@ -51,7 +56,11 @@ export default function CourseCard({
             holdMs={2200}
             startDelay={500 + oi * 1100}
             className={`font-mono text-fluid-xs leading-snug ${
-              imageLeft ? "text-black/45" : "text-white/55"
+              course.scene
+                ? "text-white/95 [text-shadow:0_1px_6px_rgba(0,0,0,0.55)]"
+                : imageLeft
+                ? "text-black/60"
+                : "text-white/80"
             }`}
           />
         </div>
@@ -75,19 +84,20 @@ export default function CourseCard({
               strokeWidth="1.2"
               vectorEffect="non-scaling-stroke"
             >
-              {/* horizon */}
+              {/* Vanishing point sits on the blue crystal of the mage's staff */}
+              {/* horizon through the crystal */}
+              <line x1="-3000" y1="836" x2="4000" y2="836" />
+              {/* depth lines (receding below the crystal) */}
               <line x1="-3000" y1="1000" x2="4000" y2="1000" />
-              {/* depth lines (receding toward horizon) */}
-              <line x1="-3000" y1="1140" x2="4000" y2="1140" />
-              <line x1="-3000" y1="1320" x2="4000" y2="1320" />
-              <line x1="-3000" y1="1560" x2="4000" y2="1560" />
+              <line x1="-3000" y1="1220" x2="4000" y2="1220" />
+              <line x1="-3000" y1="1520" x2="4000" y2="1520" />
               {/* rays fanning out from the vanishing point */}
-              <line x1="500" y1="1000" x2="-1400" y2="2800" />
-              <line x1="500" y1="1000" x2="-300" y2="2800" />
-              <line x1="500" y1="1000" x2="320" y2="2800" />
-              <line x1="500" y1="1000" x2="680" y2="2800" />
-              <line x1="500" y1="1000" x2="1300" y2="2800" />
-              <line x1="500" y1="1000" x2="2400" y2="2800" />
+              <line x1="248" y1="836" x2="-1600" y2="2800" />
+              <line x1="248" y1="836" x2="-600" y2="2800" />
+              <line x1="248" y1="836" x2="200" y2="2800" />
+              <line x1="248" y1="836" x2="800" y2="2800" />
+              <line x1="248" y1="836" x2="1600" y2="2800" />
+              <line x1="248" y1="836" x2="2900" y2="2800" />
             </g>
           ) : index === 2 ? (
             // Golden-triangle armature (strategy / decisions),

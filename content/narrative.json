@@ -298,17 +298,20 @@
       "name": "Алла Довгалюк",
       "role": "Основательница школы GDD. Гейм-дизайнер, нарративный дизайнер, сценарист игр, магистр литературного редактирования.",
       "image": "/alla-2.webp",
-      "badge": "Главный преподаватель"
+      "badge": "Главный преподаватель",
+      "imagePosition": "35% 25%"
     },
     {
       "name": "Евгений Марушко",
       "role": "Преподаватель по прототипированию",
-      "image": "/eugene.webp"
+      "image": "/eugene.webp",
+      "imagePosition": "center 8%"
     },
     {
       "name": "Александр Лавришко",
       "role": "Продюсер Saber Porto",
-      "image": "/alex.webp"
+      "image": "/alex.webp",
+      "imagePosition": "center 12%"
     }
   ],
   "pricing": {
