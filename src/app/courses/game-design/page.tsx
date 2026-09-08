@@ -9,6 +9,7 @@ import TeachersCarousel from "@/components/TeachersCarousel";
 import FaqAccordion from "@/components/FaqAccordion";
 import CourseCard from "@/components/CourseCard";
 import ProgramSection from "@/components/ProgramSection";
+import VideoLecture from "@/components/VideoLecture";
 import PricingPanel from "@/components/PricingPanel";
 import Marquee from "@/components/Marquee";
 import { features, courses, studioLogos } from "@/data/content";
@@ -22,6 +23,7 @@ import {
   gameDesignPricing,
   gameDesignFaq,
   gameDesignTestimonials,
+  gameDesignVideo,
 } from "@/data/game-design";
 
 const courseDescription =
@@ -186,6 +188,11 @@ export default function GameDesignCoursePage() {
             weeks={gameDesignProgramWeeks}
             totalWeeks={gameDesignTotalWeeks}
           />
+
+          {/* ── ВИДЕОЛЕКЦИЯ ─────────────────────────────────── */}
+          <div className="-mt-20">
+            <VideoLecture title={gameDesignVideo.title} url={gameDesignVideo.url} />
+          </div>
 
           {/* ── ПРЕПОДАВАТЕЛИ ───────────────────────────────── */}
           {gameDesignTeachers.length > 0 && (

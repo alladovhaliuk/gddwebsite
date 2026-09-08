@@ -322,26 +322,14 @@ content:
             label: Ответ
             type: text
             required: true
-      - name: presentation
-        label: Блок «Презентация курса»
+      - name: videoLecture
+        label: Видеолекция
         type: object
         fields:
           - name: title
-            label: Заголовок
-            type: string
-          - name: subtext
-            label: Текст
-            type: text
-          - name: cta
-            label: Кнопка презентации
+            label: Заголовок над видео
             type: string
           - name: url
-            label: Ссылка на презентацию
-            type: string
-          - name: videoCta
-            label: Кнопка видео
-            type: string
-          - name: videoUrl
             label: Ссылка на видео (YouTube)
             type: string
       - name: testimonials
@@ -461,6 +449,10 @@ content:
           - name: imagePosition
             label: "⚙️ Кадрирование фото (техническое, не менять)"
             type: string
+          - name: books
+            label: Книги автора (обложки)
+            type: image
+            list: true
       - name: pricing
         label: Стоимость
         type: object
@@ -507,26 +499,14 @@ content:
             label: Ответ
             type: text
             required: true
-      - name: presentation
-        label: Блок «Презентация курса»
+      - name: videoLecture
+        label: Видеолекция
         type: object
         fields:
           - name: title
-            label: Заголовок
-            type: string
-          - name: subtext
-            label: Текст
-            type: text
-          - name: cta
-            label: Кнопка презентации
+            label: Заголовок над видео
             type: string
           - name: url
-            label: Ссылка на презентацию
-            type: string
-          - name: videoCta
-            label: Кнопка видео
-            type: string
-          - name: videoUrl
             label: Ссылка на видео (YouTube)
             type: string
       - name: testimonials
@@ -605,6 +585,9 @@ content:
           - name: image
             label: Фото
             type: image
+          - name: imagePosition
+            label: "⚙️ Кадрирование фото (техническое, не менять)"
+            type: string
       - name: servicesHeading
         label: Заголовок блока «Вместе мы»
         type: string

@@ -16,7 +16,6 @@ import type {
   Teacher,
   Pricing,
   FaqItem,
-  Presentation,
 } from "@/data/types";
 import data from "../../content/narrative.json";
 
@@ -35,7 +34,8 @@ export const pricing: Pricing = data.pricing;
 
 export const faq: FaqItem[] = data.faq;
 
-export const presentation: Presentation = data.presentation;
 
 export const narrativeTestimonials: { name: string; text: string }[] =
   data.testimonials;
+
+export const narrativeVideo = data.videoLecture as { title: string; url: string };

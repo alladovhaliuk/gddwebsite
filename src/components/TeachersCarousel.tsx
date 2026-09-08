@@ -50,7 +50,7 @@ export default function TeachersCarousel({
         {items.map((t, i) => (
           <article
             key={t.name}
-            className={`flex flex-col bg-white ${
+            className={`group flex flex-col bg-white ${
               i < items.length - 1 ? "md:border-r md:border-black/10" : ""
             } ${i > 0 ? "border-t border-black/10 md:border-t-0" : ""}`}
           >
@@ -79,9 +79,30 @@ export default function TeachersCarousel({
                 </span>
               )}
               {t.badge && (
-                <span className="absolute bottom-4 left-4 whitespace-nowrap rounded-full bg-white/95 px-4 py-1.5 text-[12px] font-medium text-foreground shadow-sm backdrop-blur">
+                <span className="absolute left-4 top-4 z-20 whitespace-nowrap rounded-full bg-white/95 px-4 py-1.5 text-[12px] font-medium text-foreground shadow-sm backdrop-blur">
                   {t.badge}
                 </span>
+              )}
+              {/* Author's books, fanned out in the bottom-right corner. */}
+              {t.books && t.books.length > 0 && (
+                <div className="pointer-events-none absolute inset-x-0 -bottom-[5px] z-10 flex origin-bottom-right items-end justify-end pr-3 transition-transform duration-300 ease-out group-hover:-translate-y-2 group-hover:scale-[1.05]">
+                  {t.books.map((b, bi) => (
+                    <Image
+                      key={b}
+                      src={b}
+                      alt=""
+                      aria-hidden
+                      width={160}
+                      height={248}
+                      className="h-auto w-[33%] max-w-[9rem] rounded-[4px] shadow-[0_10px_24px_rgba(0,0,0,0.4)] ring-1 ring-black/10 transition-transform duration-300 ease-out"
+                      style={{
+                        marginLeft: bi > 0 ? "-15%" : undefined,
+                        transformOrigin: "bottom right",
+                        transform: `translateY(16%) rotate(${bi === 0 ? -8 : 6}deg)`,
+                      }}
+                    />
+                  ))}
+                </div>
               )}
             </div>
           </article>

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { ArrowRight, Gift, CreditCard, Play, ThumbsUp } from "lucide-react";
+import { Gift, CreditCard, ThumbsUp } from "lucide-react";
 import StickyHeader, { type NavLink } from "@/components/StickyHeader";
 import Footer from "@/components/Footer";
 import CourseHero from "@/components/CourseHero";
+import VideoLecture from "@/components/VideoLecture";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import TeachersCarousel from "@/components/TeachersCarousel";
 import FaqAccordion from "@/components/FaqAccordion";
@@ -21,8 +22,8 @@ import {
   teachers,
   pricing,
   faq,
-  presentation,
   narrativeTestimonials,
+  narrativeVideo,
 } from "@/data/narrative";
 
 const courseDescription =
@@ -245,50 +246,10 @@ export default function NarrativeCoursePage() {
             </div>
           </section>
 
-          {/* ── ПРЕЗЕНТАЦИЯ — full-content-width image card ─── */}
-          <section className="relative -mx-6 -mt-20 min-h-[28rem] overflow-hidden border-b border-black/10 md:aspect-[1160/360] md:min-h-0">
-            <Image
-              src="/presentation.webp"
-              alt=""
-              fill
-              sizes="(min-width: 1160px) 1160px, 100vw"
-              className="object-cover"
-            />
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-5 px-6 text-center md:px-12">
-              <h2 className="mx-auto max-w-2xl text-fluid-3xl font-bold leading-tight text-white">
-                {presentation.title}
-              </h2>
-              <p className="mx-auto max-w-xl text-fluid-sm leading-snug text-white/85">
-                {presentation.subtext}
-              </p>
-              <div className="flex w-full max-w-sm flex-col items-stretch gap-3 md:max-w-none md:flex-row md:flex-wrap md:items-center md:justify-center">
-                {/* Primary CTA — frosted-glass pill, same shape as the hero CTA */}
-                <a
-                  href={presentation.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex w-full items-center justify-center gap-2.5 rounded-xl bg-white/80 py-2 pl-4 pr-2 text-[14px] text-black backdrop-blur-md transition hover:bg-white md:inline-flex md:w-auto"
-                >
-                  <span>{presentation.cta}</span>
-                  <span className="grid size-7 place-items-center rounded-lg bg-white text-brand-orange transition-transform group-hover:translate-x-0.5">
-                    <ArrowRight className="size-4" strokeWidth={2.25} />
-                  </span>
-                </a>
-                {/* Secondary CTA — same pill shape, outlined glass for hierarchy */}
-                <a
-                  href={presentation.videoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex w-full items-center justify-center gap-2.5 rounded-xl border border-white/40 bg-white/10 py-2 pl-4 pr-2 text-[14px] text-white backdrop-blur-md transition hover:bg-white/20 md:inline-flex md:w-auto"
-                >
-                  <span>{presentation.videoCta}</span>
-                  <span className="grid size-7 place-items-center rounded-lg bg-white text-brand-orange transition-transform group-hover:translate-x-0.5">
-                    <Play className="size-3 translate-x-[1px]" strokeWidth={2.25} fill="currentColor" />
-                  </span>
-                </a>
-              </div>
-            </div>
-          </section>
+          {/* ── ВИДЕОЛЕКЦИЯ ─────────────────────────────────── */}
+          <div className="-mt-20">
+            <VideoLecture title={narrativeVideo.title} url={narrativeVideo.url} />
+          </div>
 
           {/* ── FAQ ─────────────────────────────────────────── */}
           <section id="faq" className="-mt-20 scroll-mt-28">

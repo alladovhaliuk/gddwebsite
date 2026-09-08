@@ -15,7 +15,6 @@ import type {
   Teacher,
   Pricing,
   FaqItem,
-  Presentation,
 } from "@/data/types";
 import data from "../../content/game-design.json";
 
@@ -34,7 +33,8 @@ export const gameDesignPricing: Pricing = data.pricing;
 
 export const gameDesignFaq: FaqItem[] = data.faq;
 
-export const gameDesignPresentation: Presentation = data.presentation;
 
 export const gameDesignTestimonials: { name: string; text: string }[] =
   data.testimonials;
+
+export const gameDesignVideo = data.videoLecture as { title: string; url: string };

@@ -5,6 +5,10 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 
 type Item = { name: string; text: string };
 
+// Testimonials longer than this get a full-width slide of their own; shorter
+// ones pair up two-per-slide (one-per-slide on mobile).
+const LONG = 350;
+
 export default function TestimonialsCarousel({ items }: { items: Item[] }) {
   const [page, setPage] = useState(0);
   const [perView, setPerView] = useState(2);
@@ -17,18 +21,32 @@ export default function TestimonialsCarousel({ items }: { items: Item[] }) {
     return () => window.removeEventListener("resize", update);
   }, []);
 
-  // Split the reviews into `perView` contiguous chunks — one per container.
-  // Each container cycles through its own chunk; nav slides them all in sync.
-  // The first chunk is the longest, so its length is the number of slides;
-  // with an uneven total the final slide may leave a trailing slot empty.
-  const chunkSize = Math.max(1, Math.ceil(items.length / perView));
-  const pageCount = chunkSize;
+  // Group into slides: a long testimonial takes a full-width slide of its own;
+  // short ones fill up to `perView` per slide. Mobile is always 1-up.
+  const slides: Item[][] = [];
+  let bucket: Item[] = [];
+  const flush = () => {
+    if (bucket.length) {
+      slides.push(bucket);
+      bucket = [];
+    }
+  };
+  for (const it of items) {
+    if (it.text.length > LONG || perView === 1) {
+      flush();
+      slides.push([it]);
+    } else {
+      bucket.push(it);
+      if (bucket.length === perView) flush();
+    }
+  }
+  flush();
+
+  const pageCount = Math.max(1, slides.length);
   const current = Math.min(page, pageCount - 1);
+  const slide = slides[current] ?? [];
   const atStart = current <= 0;
   const atEnd = current >= pageCount - 1;
-
-  const slotItems = (s: number) =>
-    items.slice(s * chunkSize, (s + 1) * chunkSize);
 
   return (
     <div className="relative z-20 bg-white">
@@ -64,35 +82,28 @@ export default function TestimonialsCarousel({ items }: { items: Item[] }) {
         </div>
       </div>
 
-      {/* Fixed-height slots; text slides horizontally and hides behind the
-          white padding/edges of each card */}
-      <div className="grid md:grid-cols-2">
-        {Array.from({ length: perView }, (_, s) => (
+      {/* Current slide — natural height so the full review always fits (no
+          clipping). `key` re-triggers the fade when the page changes. Long
+          reviews are one full-width card; short ones share the row. */}
+      <div
+        key={current}
+        className={`grid animate-fade ${
+          slide.length > 1 ? "md:grid-cols-2" : "grid-cols-1"
+        }`}
+      >
+        {slide.map((t, j) => (
           <figure
-            key={s}
-            className="relative h-[22rem] overflow-hidden p-6 md:p-10 md:[&:not(:last-child)]:border-r border-black/10"
+            key={`${t.name}-${j}`}
+            className={`flex min-h-[18rem] flex-col gap-4 p-6 md:p-10 ${
+              slide.length > 1 && j === 0 ? "md:border-r border-black/10" : ""
+            }`}
           >
-            {/* masked viewport inset by the white padding */}
-            <div className="relative h-full overflow-hidden">
-              <div
-                className="flex h-full transition-transform duration-500 ease-out"
-                style={{ transform: `translateX(-${current * 100}%)` }}
-              >
-                {slotItems(s).map((t, idx) => (
-                  <div
-                    key={`${t.name}-${idx}`}
-                    className="flex h-full w-full shrink-0 flex-col gap-4"
-                  >
-                    <figcaption className="font-bold text-foreground">
-                      {t.name}
-                    </figcaption>
-                    <blockquote className="text-fluid-sm leading-relaxed text-foreground/70">
-                      {t.text}
-                    </blockquote>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <figcaption className="font-bold text-foreground">
+              {t.name}
+            </figcaption>
+            <blockquote className="text-fluid-sm leading-relaxed text-foreground/70">
+              {t.text}
+            </blockquote>
           </figure>
         ))}
       </div>

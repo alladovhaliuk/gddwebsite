@@ -34,6 +34,9 @@ export type Teacher = {
   // Optional CSS `object-position` override for the portrait (default
   // `center 22%`). Per-teacher because each photo's framing is different.
   imagePosition?: string;
+  // Optional book covers (paths under /public) fanned out at the bottom of the
+  // portrait — e.g. the teacher's published books.
+  books?: string[];
 };
 
 export type Pricing = {
