@@ -6,14 +6,20 @@ import ClickSpark from "@/components/ClickSpark";
 import { contactEmail, socials } from "@/data/content";
 import { Analytics } from "@vercel/analytics/next";
 
-// LINE Seed JP via Google Fonts (v3) — this build has properly proportional
-// Cyrillic, so it renders both Latin and the Russian copy with normal tracking.
-// next/font self-hosts and subsets it (latin + cyrillic) at build time.
+// LINE Seed JP via Google Fonts — used for the Latin brand look (logo, English
+// words, headings). This is a Japanese family: Google serves it as ~370
+// unicode-range slices and does NOT honour a `subsets` restriction for CJK
+// fonts, and it carries no Cyrillic at all — the Russian copy renders in the
+// system-ui fallback below. So preload is DISABLED: preloading would block
+// first paint on ~250 font files (4+ MB, mostly kanji the site never shows).
+// With `display: "swap"` the page paints instantly in the fallback and the one
+// or two Latin slices that are actually used swap in on demand.
 const lineSeed = LINE_Seed_JP({
   variable: "--font-line",
-  subsets: ["latin", "cyrillic"],
+  subsets: ["latin"],
   weight: ["400", "700", "800"],
   display: "swap",
+  preload: false,
 });
 
 // IBM Plex Mono — typewriter-style monospace with Cyrillic support.

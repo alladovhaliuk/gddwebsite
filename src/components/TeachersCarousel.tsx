@@ -83,27 +83,6 @@ export default function TeachersCarousel({
                   {t.badge}
                 </span>
               )}
-              {/* Author's books, fanned out in the bottom-right corner. */}
-              {t.books && t.books.length > 0 && (
-                <div className="pointer-events-none absolute inset-x-0 -bottom-[5px] z-10 flex origin-bottom-right items-end justify-end pr-3 transition-transform duration-300 ease-out group-hover:-translate-y-2 group-hover:scale-[1.05]">
-                  {t.books.map((b, bi) => (
-                    <Image
-                      key={b}
-                      src={b}
-                      alt=""
-                      aria-hidden
-                      width={160}
-                      height={248}
-                      className="h-auto w-[33%] max-w-[9rem] rounded-[4px] shadow-[0_10px_24px_rgba(0,0,0,0.4)] ring-1 ring-black/10 transition-transform duration-300 ease-out"
-                      style={{
-                        marginLeft: bi > 0 ? "-15%" : undefined,
-                        transformOrigin: "bottom right",
-                        transform: `translateY(16%) rotate(${bi === 0 ? -8 : 6}deg)`,
-                      }}
-                    />
-                  ))}
-                </div>
-              )}
             </div>
           </article>
         ))}

@@ -405,27 +405,30 @@ Button text is `text-[14px]` (fixed, not fluid) for nav/CTA consistency.
 - Pagination: `SCHEDULE_PAGE_SIZE = 3`, computed `SCHEDULE_PAGE_COUNT` derived
   from `programWeeks` length.
 
-### 3.10 Course-page presentation card (narrative)
+### 3.10 Course-page video lecture (`VideoLecture`)
 
-- Single full-content-width image block linking to the course presentation +
-  open lecture (data in `data/narrative.ts → presentation`). Layout:
+- Replaces the old presentation card. A captioned, ready-to-play YouTube embed
+  framed like the other full-content-width sections (bordered header + 16:9
+  embed). Data in `content/<course>.json → videoLecture` (`{title, url}`),
+  editable in Pages CMS. Layout:
   ```
-  <section> aspect-[1160/360] -mx-6 -mt-20 border-y border-black/10
-    <Image fill src="/presentation.png" />
-    <div absolute inset-0 flex flex-col items-center justify-center gap-5>
-      <h2 text-fluid-3xl font-bold text-white>title</h2>
-      <p  text-fluid-sm text-white/85>subtext</p>
-      <div flex gap-3>
-        primary frosted CTA  →  Drive presentation
-        secondary frosted CTA → YouTube lecture (Play icon, size-3 filled)
-      </div>
-    </div>
-  </section>
+  <section> -mx-6 border-x border-b border-black/10
+    <div border-b> <h2 text-fluid-3xl>title</h2>
+    <div p-6 md:p-10>
+      <div aspect-video rounded-xl overflow-hidden bg-black>
+        <iframe youtube-nocookie.com/embed/{id}?rel=0 loading="lazy" />
   ```
-- **No dark scrim, no drop-shadow on the text.** The card relies on the
-  image's natural contrast — if a new presentation image breaks legibility,
-  fix the image, don't add overlays.
-- Both CTAs `target="_blank" rel="noopener noreferrer"`.
+- `url` accepts any common YouTube link (watch/youtu.be/embed/shorts/live) or a
+  bare 11-char id — `youTubeId()` normalises it, so the client can paste a
+  normal link in the CMS.
+
+### 3.11 Course-page books block (`TeacherBooks`)
+
+- Dedicated "Книги преподавателя" section (game-design). Each of a teacher's
+  `books` (`{cover, title, note}` in `content/game-design.json`, editable in
+  CMS) renders as a large upright cover with a spine highlight beside a bold
+  title + author line — so titles stay legible. Replaces the old cramped
+  book-fan overlay that used to sit on the portrait.
 
 ---
 

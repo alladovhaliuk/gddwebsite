@@ -68,8 +68,14 @@ export default function BookingForm() {
   const [telegram, setTelegram] = useState("");
   const [email, setEmail] = useState("");
   const [note, setNote] = useState("");
-  // 1 = full payment; 2–6 = installments.
-  const [parts, setParts] = useState<number>(1);
+  // 1 = full payment; 2–6 = installments. `?plan=installment` (from the
+  // "Оплатить частями" CTA) opens the form with the installment plan
+  // preselected so the intent carries over from the pricing panel.
+  const [parts, setParts] = useState<number>(
+    params.get("plan") === "installment" && initialCourse
+      ? initialCourse.pricing.installments
+      : 1
+  );
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);

@@ -26,6 +26,14 @@ export type ProgramWeek = {
   tasks: ProgramTask[];
 };
 
+// A book authored by a teacher, shown in the dedicated Книги block (large,
+// upright cover + readable caption) rather than as tiny overlays.
+export type TeacherBook = {
+  cover: string; // path under /public
+  title?: string; // shown next to the cover
+  note?: string; // secondary line, e.g. co-authors
+};
+
 export type Teacher = {
   name: string;
   role: string;
@@ -34,21 +42,20 @@ export type Teacher = {
   // Optional CSS `object-position` override for the portrait (default
   // `center 22%`). Per-teacher because each photo's framing is different.
   imagePosition?: string;
-  // Optional book covers (paths under /public) fanned out at the bottom of the
-  // portrait — e.g. the teacher's published books.
-  books?: string[];
+  // Optional published books — rendered in their own Книги section so the
+  // covers and titles are clearly legible.
+  books?: TeacherBook[];
 };
 
 export type Pricing = {
   price: string; // display string e.g. "$759"
   priceValue: number; // numeric value used for installment math
   currency: string;
-  installments: number; // default number of parts when "Рассчитать рассрочку" opens
+  installments: number; // default number of parts shown as the installment hint
   note: string;
   perk: string;
-  primaryCta: string;
-  secondaryCta: string;
-  installmentCtaLabel: string;
+  primaryCta: string; // pay-in-full CTA, e.g. "Купить курс целиком"
+  secondaryCta: string; // pay-in-parts CTA, e.g. "Оплатить частями"
 };
 
 export type FaqItem = { q: string; a: string };

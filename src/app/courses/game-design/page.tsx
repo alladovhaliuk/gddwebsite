@@ -10,6 +10,7 @@ import FaqAccordion from "@/components/FaqAccordion";
 import CourseCard from "@/components/CourseCard";
 import ProgramSection from "@/components/ProgramSection";
 import VideoLecture from "@/components/VideoLecture";
+import TeacherBooks from "@/components/TeacherBooks";
 import PricingPanel from "@/components/PricingPanel";
 import Marquee from "@/components/Marquee";
 import { features, courses, studioLogos } from "@/data/content";
@@ -94,6 +95,9 @@ const courseNavLinks: NavLink[] = [
 
 export default function GameDesignCoursePage() {
   const crossSell = courses[0]; // «Нарративщики»
+
+  // Teachers' published books, collected for the dedicated Книги block.
+  const teacherBooks = gameDesignTeachers.flatMap((t) => t.books ?? []);
 
   // Derive the pricing benefit numbers directly from the program so they stay
   // accurate as the curriculum evolves.
@@ -204,6 +208,13 @@ export default function GameDesignCoursePage() {
                 />
               </div>
             </section>
+          )}
+
+          {/* ── КНИГИ ПРЕПОДАВАТЕЛЯ ─────────────────────────── */}
+          {teacherBooks.length > 0 && (
+            <div className="-mt-20">
+              <TeacherBooks items={teacherBooks} title="Книги Иеронима К." />
+            </div>
           )}
 
           {/* ── СТОИМОСТЬ — title left, pricing card right (как «Результаты») ── */}

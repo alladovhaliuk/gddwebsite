@@ -130,6 +130,9 @@ content:
           - name: href
             label: "⚙️ Ссылка на страницу курса (техническое, не менять)"
             type: string
+          - name: scene
+            label: "⚙️ Анимированная сцена карточки (техническое, не менять)"
+            type: string
           - name: overlays
             label: Печатающийся текст поверх картинки
             type: object
@@ -304,10 +307,7 @@ content:
             label: Главная кнопка
             type: string
           - name: secondaryCta
-            label: Вторая кнопка (открыть рассрочку)
-            type: string
-          - name: installmentCtaLabel
-            label: Кнопка «скрыть рассрочку»
+            label: Вторая кнопка (оплатить частями)
             type: string
       - name: faq
         label: Вопросы и ответы (FAQ)
@@ -450,9 +450,19 @@ content:
             label: "⚙️ Кадрирование фото (техническое, не менять)"
             type: string
           - name: books
-            label: Книги автора (обложки)
-            type: image
+            label: Книги автора
+            type: object
             list: true
+            fields:
+              - name: cover
+                label: Обложка
+                type: image
+              - name: title
+                label: Название книги
+                type: string
+              - name: note
+                label: Авторы / подпись
+                type: string
       - name: pricing
         label: Стоимость
         type: object
@@ -481,10 +491,7 @@ content:
             label: Главная кнопка
             type: string
           - name: secondaryCta
-            label: Вторая кнопка (открыть рассрочку)
-            type: string
-          - name: installmentCtaLabel
-            label: Кнопка «скрыть рассрочку»
+            label: Вторая кнопка (оплатить частями)
             type: string
       - name: faq
         label: Вопросы и ответы (FAQ)
