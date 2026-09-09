@@ -1,26 +1,17 @@
 import type { Metadata, Viewport } from "next";
-import { LINE_Seed_JP, IBM_Plex_Mono } from "next/font/google";
+import { IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import ClickSpark from "@/components/ClickSpark";
 import { contactEmail, socials } from "@/data/content";
 import { Analytics } from "@vercel/analytics/next";
 
-// LINE Seed JP via Google Fonts — used for the Latin brand look (logo, English
-// words, headings). This is a Japanese family: Google serves it as ~370
-// unicode-range slices and does NOT honour a `subsets` restriction for CJK
-// fonts, and it carries no Cyrillic at all — the Russian copy renders in the
-// system-ui fallback below. So preload is DISABLED: preloading would block
-// first paint on ~250 font files (4+ MB, mostly kanji the site never shows).
-// With `display: "swap"` the page paints instantly in the fallback and the one
-// or two Latin slices that are actually used swap in on demand.
-const lineSeed = LINE_Seed_JP({
-  variable: "--font-line",
-  subsets: ["latin"],
-  weight: ["400", "700", "800"],
-  display: "swap",
-  preload: false,
-});
+// The sans family is the system font stack (see globals.css `--font-sans`).
+// We dropped the previous LINE Seed JP webfont: it's a Japanese family that
+// Google serves as ~370 unicode-range slices with NO Cyrillic, so it never
+// styled the Russian copy — yet next/font still emitted all 372 @font-face
+// rules into the stylesheet (~280 KB that shipped to every visitor). System
+// fonts render both Latin and Cyrillic instantly with zero download.
 
 // IBM Plex Mono — typewriter-style monospace with Cyrillic support.
 const plexMono = IBM_Plex_Mono({
@@ -124,7 +115,7 @@ export default function RootLayout({
   return (
     <html
       lang="ru"
-      className={`${lineSeed.variable} ${plexMono.variable} h-full antialiased`}
+      className={`${plexMono.variable} h-full antialiased`}
     >
       <body className="min-h-full">
         {/* Skip-to-content link for keyboard / screen-reader users.
