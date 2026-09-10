@@ -1,5 +1,59 @@
 @import "tailwindcss";
 
+/* LINE Seed JP — the brand sans. Self-hosted, and subsetted to Cyrillic + Latin
+   only (Google's own slices), so the Russian and Latin copy render in the brand
+   face while the ~360 kanji slices that used to bloat the stylesheet are gone.
+   Each file keeps Google's exact unicode-range so Cyrillic and Latin combine.
+   font-display:swap → instant paint in the fallback, brand face swaps in. */
+@font-face {
+  font-family: "LINE Seed JP";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/lineseed/lineseed-cyrillic-400.woff2") format("woff2");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: "LINE Seed JP";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/lineseed/lineseed-latin-400.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "LINE Seed JP";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/lineseed/lineseed-cyrillic-700.woff2") format("woff2");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: "LINE Seed JP";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/lineseed/lineseed-latin-700.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "LINE Seed JP";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("/fonts/lineseed/lineseed-cyrillic-800.woff2") format("woff2");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: "LINE Seed JP";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("/fonts/lineseed/lineseed-latin-800.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -15,7 +69,7 @@
   --color-brand-orange: var(--brand-orange);
   --color-cream: var(--cream);
 
-  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "LINE Seed JP", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono: var(--font-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
 
   /* Fluid type scale — interpolates between 320px and 1280px viewports.

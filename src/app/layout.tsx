@@ -6,12 +6,12 @@ import ClickSpark from "@/components/ClickSpark";
 import { contactEmail, socials } from "@/data/content";
 import { Analytics } from "@vercel/analytics/next";
 
-// The sans family is the system font stack (see globals.css `--font-sans`).
-// We dropped the previous LINE Seed JP webfont: it's a Japanese family that
-// Google serves as ~370 unicode-range slices with NO Cyrillic, so it never
-// styled the Russian copy — yet next/font still emitted all 372 @font-face
-// rules into the stylesheet (~280 KB that shipped to every visitor). System
-// fonts render both Latin and Cyrillic instantly with zero download.
+// The brand sans (LINE Seed JP) is self-hosted in globals.css, subsetted to
+// Cyrillic + Latin only. We can't load it through next/font: Google serves this
+// family as ~372 unicode-range slices and its ~360 kanji slices carry no subset
+// label, so `subsets` can't exclude them — next/font shipped all of them (~280
+// KB CSS). Instead we self-host Google's own Cyrillic + Latin woff2 slices (6
+// small files) with hand-written @font-face rules — brand face, no kanji.
 
 // IBM Plex Mono — typewriter-style monospace with Cyrillic support.
 const plexMono = IBM_Plex_Mono({
